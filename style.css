@@ -116,7 +116,7 @@ a { text-decoration: none; color: inherit; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 72px;
+  padding-top: 128px;
   padding-bottom: 44px;
   min-height: 0;
 }
