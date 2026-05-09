@@ -449,14 +449,42 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: .10em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, .52);
+  cursor: default;
+  will-change: transform;
+  transition:
+    background  380ms ease,
+    border-color 380ms ease,
+    box-shadow  380ms ease;
 }
+.location-pill:hover {
+  background:    rgba(255, 255, 255, .075);
+  border-color:  rgba(255, 255, 255, .15);
+  box-shadow:
+    0 0 18px rgba(109, 175, 135, .08),
+    0 0  0 1px rgba(109, 175, 135, .06) inset;
+}
+
+.pill-text {
+  transition:
+    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter  480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pill-text.fading {
+  opacity: 0;
+  filter: blur(3px);
+}
+
 .location-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #6daf87;
   flex-shrink: 0;
-  box-shadow: 0 0 6px rgba(109, 175, 135, .55);
+  animation: dot-breathe 5s ease-in-out infinite;
+}
+@keyframes dot-breathe {
+  0%,  100% { box-shadow: 0 0 4px rgba(109, 175, 135, .40); opacity: .80; }
+  50%        { box-shadow: 0 0 9px rgba(109, 175, 135, .75); opacity: 1;   }
 }
 
 .copyright {
@@ -472,6 +500,8 @@ a { text-decoration: none; color: inherit; }
   .project:hover,
   .project:focus-visible { transform: none !important; }
   .card--pulse { filter: none !important; }
+  .location-pill { transform: none !important; }
+  .pill-text { transition: opacity 80ms linear !important; filter: none !important; }
 }
 
 /* ─── Responsive ─── */

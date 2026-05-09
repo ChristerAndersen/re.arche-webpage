@@ -153,3 +153,46 @@
   });
 
 }());
+
+// —— Identity capsule ——
+(function () {
+  const pill     = document.querySelector('.location-pill');
+  const pillText = document.querySelector('.pill-text');
+  if (!pill || !pillText) return;
+
+  const phrases = [
+    'Norway · Worldwide',
+    'Built on Clarity',
+    'Less Noise · More Meaning',
+    'Digital Minimalism',
+    'Back to First Principles',
+    'Calm Technology',
+  ];
+  let idx = 0;
+
+  function rotate() {
+    pillText.classList.add('fading');
+    setTimeout(() => {
+      idx = (idx + 1) % phrases.length;
+      pillText.textContent = phrases[idx];
+      pillText.classList.remove('fading');
+    }, 480);
+  }
+
+  function schedule() {
+    const delay = 6000 + Math.random() * 2000;
+    setTimeout(() => { rotate(); schedule(); }, delay);
+  }
+  schedule();
+
+  // Micro-parallax — 1.5px max, respects reduced-motion
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.addEventListener('mousemove', (e) => {
+    if (prefersReduced.matches) return;
+    const cx = window.innerWidth  / 2;
+    const cy = window.innerHeight / 2;
+    const x  = ((e.clientX - cx) / cx) * 1.5;
+    const y  = ((e.clientY - cy) / cy) * 1.5;
+    pill.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`;
+  });
+}());
