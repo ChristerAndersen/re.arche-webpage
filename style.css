@@ -584,12 +584,12 @@ a { text-decoration: none; color: inherit; }
   padding: 0 40px;
 }
 @keyframes marquee-scroll {
-  0%    { transform: translateX(0);     opacity: 0; }
-  4%    { transform: translateX(0);     opacity: 1; }
-  68%   { transform: translateX(-88%);  opacity: 1; }
-  76%   { transform: translateX(-100%); opacity: 0; }
-  76.1% { transform: translateX(0);     opacity: 0; }
-  100%  { transform: translateX(0);     opacity: 0; }
+  0%    { transform: translateX(100vw);  opacity: 0; }
+  6%    { transform: translateX(88vw);   opacity: 1; }
+  74%   { transform: translateX(-90%);   opacity: 1; }
+  82%   { transform: translateX(-100%);  opacity: 0; }
+  82.1% { transform: translateX(100vw);  opacity: 0; }
+  100%  { transform: translateX(100vw);  opacity: 0; }
 }
 
 /* ─── Meta row ─── */
