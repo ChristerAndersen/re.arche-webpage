@@ -1,6 +1,375 @@
+/* ─── Reset ─── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+
 body {
-  font-family: system-ui, sans-serif;
-  background: #fff;
-  color: #111;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+               Inter, system-ui, sans-serif;
+  background: #0a0c13;
+  color: #fff;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ─── Background ─── */
+.bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Planet body with atmospheric rim */
+.bg-earth {
+  position: absolute;
+  right: -10%;
+  bottom: -46%;
+  width: min(860px, 65vw);
+  height: min(860px, 65vw);
+  border-radius: 50%;
+  background:
+    /* Atmospheric rim — blue-white glow on upper-left edge */
+    radial-gradient(
+      ellipse 68% 26% at 38% 18%,
+      rgba(130, 200, 255, .22) 0%,
+      rgba(70,  145, 250, .11) 28%,
+      transparent               52%
+    ),
+    /* Planet body */
+    radial-gradient(
+      circle at 48% 46%,
+      #1c3055 0%,
+      #101e3a 22%,
+      #090f24 52%,
+      #050a17 100%
+    );
+  box-shadow:
+    0 0  60px rgba(30,  80, 200, .16),
+    0 0 140px rgba(18,  55, 160, .08);
+}
+
+/* Diffuse blue atmospheric spread above the planet */
+.bg-diffuse {
+  position: absolute;
+  right: -6%;
+  bottom: -4%;
+  width: min(1000px, 75vw);
+  height: min(520px, 45vw);
+  background: radial-gradient(
+    ellipse at 62% 88%,
+    rgba(28, 76, 200, .13) 0%,
+    rgba(18, 58, 158, .06) 40%,
+    transparent             70%
+  );
+  filter: blur(48px);
+}
+
+/* ─── Page shell ─── */
+.page {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 11% 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 64px;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 31px;
+  font-weight: 400;
+  letter-spacing: -.022em;
+  color: rgba(255, 255, 255, .92);
+}
+
+.nav {
+  display: flex;
+  gap: 36px;
+}
+.nav-link {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .55);
+  transition: color .2s;
+}
+.nav-link:hover,
+.nav-link:focus-visible { color: rgba(255, 255, 255, .90); }
+.nav-link:focus-visible { outline: 2px solid rgba(59,130,246,.6); outline-offset: 4px; border-radius: 2px; }
+
+/* ─── Hero ─── */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 44px;
+  min-height: 0;
+}
+
+/* Eyebrow */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .38);
+}
+.eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(59, 130, 246, .55);
+}
+
+/* Headline */
+.headline {
+  font-size: clamp(62px, 6.2vw, 88px);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -.028em;
+  color: rgba(255, 255, 255, .94);
+  margin-top: 14px;
+}
+
+/* ─── Content grid: projects | card ─── */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 272px;
+  gap: 60px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+/* ─── Selected Projects ─── */
+.projects-label {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .28);
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+  margin-bottom: 2px;
+}
+
+.projects-list { list-style: none; }
+
+.project {
+  display: grid;
+  grid-template-columns: 18px 52px 1fr auto;
+  align-items: center;
+  column-gap: 18px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+}
+
+/* Dot column — hidden by default, shown when active */
+.project-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  justify-self: center;
+  visibility: hidden;
+}
+.project--active .project-dot {
+  visibility: visible;
+  box-shadow: 0 0 6px rgba(59, 130, 246, .60);
+}
+
+.project-year {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .28);
+  font-variant-numeric: tabular-nums;
+}
+.project-name {
+  font-size: 27px;
+  font-weight: 400;
+  letter-spacing: -.016em;
+  line-height: 1.08;
+  color: rgba(255, 255, 255, .30);
+}
+.project-type {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .24);
+  white-space: nowrap;
+}
+
+/* Active state */
+.project--active .project-year { color: rgba(255, 255, 255, .65); }
+.project--active .project-name { color: rgba(255, 255, 255, .92); font-weight: 500; }
+.project--active .project-type { color: rgba(255, 255, 255, .52); }
+
+/* ─── Dashboard Card ─── */
+.card {
+  background: rgba(13, 18, 36, .75);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0  0  0  1px rgba(255, 255, 255, .04),
+    0 20px 60px rgba(0,   0,   0,   .55),
+    0  0 80px   rgba(20,  60, 160,  .09);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: rgba(255, 255, 255, .80);
+}
+.card-menu {
+  font-size: 13px;
+  letter-spacing: .06em;
+  color: rgba(255, 255, 255, .28);
+}
+
+.card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .34);
+  margin-bottom: 4px;
+  letter-spacing: .02em;
+}
+.stat-val {
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: -.025em;
+  color: rgba(255, 255, 255, .88);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+.stat-delta {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(109, 175, 135, .88);
+}
+
+.card-chart {
+  border-radius: 8px;
+  overflow: hidden;
+  line-height: 0;
+}
+.card-chart svg {
+  display: block;
+  width: 100%;
+  height: 52px;
+}
+
+/* ─── Brand strip ─── */
+.brand-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .22);
+  margin-top: auto;
+  padding-top: 32px;
+  flex-wrap: wrap;
+}
+.strip-sep { color: rgba(255, 255, 255, .18); }
+
+/* ─── Meta row ─── */
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.location-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, .055);
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 100px;
+  padding: 7px 15px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .52);
+}
+.location-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6daf87;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(109, 175, 135, .55);
+}
+
+.copyright {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .24);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 960px) {
+  body { overflow: auto; }
+  .page { height: auto; min-height: 100svh; }
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .card { max-width: 320px; }
+  .brand-strip { margin-top: 52px; }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 28px 6% 0; }
+  .header { padding-bottom: 44px; }
+  .logo { font-size: 26px; }
+  .nav { gap: 22px; }
+  .nav-link { font-size: 14px; }
+  .headline { font-size: clamp(48px, 12vw, 68px); }
+  .project-name { font-size: 22px; }
+  .brand-strip { font-size: 10.5px; gap: 10px; }
+  .card { max-width: 100%; }
 }

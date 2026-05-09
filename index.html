@@ -3,13 +3,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>re.arche</title>
+  <title>re.arche — Intelligence. Rebuilt.</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>re.arche</h1>
+<!-- Background scene: deep space + planet horizon -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-earth"></div>
+  <div class="bg-diffuse"></div>
+</div>
 
-  <script src="script.js"></script>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <a href="/" class="logo">re.arche</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#apps"     class="nav-link">Apps</a>
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#connects" class="nav-link">Connects</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ── -->
+  <main class="hero" id="main-content">
+
+    <!-- Eyebrow -->
+    <div class="eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      Intelligence. Rebuilt.
+    </div>
+
+    <!-- Headline -->
+    <h1 class="headline">Better apps.<br>Less noise.</h1>
+
+    <!-- Content: projects + card -->
+    <div class="content-grid">
+
+      <!-- Selected Projects -->
+      <section class="projects" aria-label="Selected projects">
+        <h2 class="projects-label">Selected Projects</h2>
+        <ul class="projects-list">
+          <li class="project">
+            <span class="project-dot" aria-hidden="true"></span>
+            <span class="project-year">2025</span>
+            <span class="project-name">Brunsohn</span>
+            <span class="project-type">design/dev</span>
+          </li>
+          <li class="project">
+            <span class="project-dot" aria-hidden="true"></span>
+            <span class="project-year">2025</span>
+            <span class="project-name">Inertia Labs</span>
+            <span class="project-type">design/dev</span>
+          </li>
+          <li class="project project--active" aria-current="true">
+            <span class="project-dot" aria-hidden="true"></span>
+            <span class="project-year">2025</span>
+            <span class="project-name">Immersion</span>
+            <span class="project-type">design/dev</span>
+          </li>
+          <li class="project">
+            <span class="project-dot" aria-hidden="true"></span>
+            <span class="project-year">2025</span>
+            <span class="project-name">SFN</span>
+            <span class="project-type">design/dev</span>
+          </li>
+          <li class="project">
+            <span class="project-dot" aria-hidden="true"></span>
+            <span class="project-year">2025</span>
+            <span class="project-name">Sustina</span>
+            <span class="project-type">dev</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Dashboard preview card -->
+      <div class="card" role="img" aria-label="Dashboard preview">
+        <div class="card-head">
+          <span class="card-title">Dashboard</span>
+          <span class="card-menu" aria-hidden="true">•••</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat">
+            <p class="stat-label">Revenue</p>
+            <p class="stat-val">$28.6M</p>
+            <p class="stat-delta">▲ 12.5%</p>
+          </div>
+          <div class="stat">
+            <p class="stat-label">Users</p>
+            <p class="stat-val">24,531</p>
+            <p class="stat-delta">▲ 8.1%</p>
+          </div>
+        </div>
+        <div class="card-chart">
+          <svg viewBox="0 0 280 52" fill="none" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="rgba(59,130,246,.22)"/>
+                <stop offset="100%" stop-color="rgba(59,130,246,0)"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 44 C22 42 38 36 58 30 C78 24 92 36 112 26 C132 16 148 24 168 14 C188 4 202 10 222 6 C242 2 260 4 280 2 L280 52 L0 52 Z" fill="url(#cg)"/>
+            <path d="M0 44 C22 42 38 36 58 30 C78 24 92 36 112 26 C132 16 148 24 168 14 C188 4 202 10 222 6 C242 2 260 4 280 2" stroke="rgba(96,165,250,.80)" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+    </div><!-- /content-grid -->
+
+    <!-- Brand principles strip -->
+    <p class="brand-strip">
+      <span>Systems with Depth</span>
+      <span class="strip-sep" aria-hidden="true">·</span>
+      <span>Intelligence. Rebuilt.</span>
+      <span class="strip-sep" aria-hidden="true">·</span>
+      <span>Precision over Decoration</span>
+    </p>
+
+    <!-- Footer meta -->
+    <div class="meta">
+      <div class="location-pill">
+        <span class="location-dot" aria-hidden="true"></span>
+        Norway · Worldwide
+      </div>
+      <span class="copyright">© re.arche studio</span>
+    </div>
+
+  </main>
+
+</div><!-- /page -->
+
+<script src="script.js"></script>
 </body>
 </html>
