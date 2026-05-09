@@ -267,6 +267,10 @@ a { text-decoration: none; color: inherit; }
   column-gap: 18px;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, .04);
+  transition:
+    opacity  240ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
 }
 .about-focus-dot-col {
   width: 7px;
@@ -280,6 +284,7 @@ a { text-decoration: none; color: inherit; }
   font-weight: 400;
   color: rgba(255, 255, 255, .28);
   font-variant-numeric: tabular-nums;
+  transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .about-focus-name {
   font-size: 27px;
@@ -287,12 +292,38 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: -.016em;
   line-height: 1.08;
   color: rgba(255, 255, 255, .30);
+  transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+              text-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .about-focus-type {
   font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, .24);
   white-space: nowrap;
+  transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Focus list hover interaction ─── */
+.about-focus-list:has(.about-focus-item:hover)        .about-focus-item,
+.about-focus-list:has(.about-focus-item:focus-visible) .about-focus-item { opacity: 0.38; }
+
+.about-focus-list:has(.about-focus-item:hover)         .about-focus-item:hover,
+.about-focus-list:has(.about-focus-item:focus-visible) .about-focus-item:focus-visible {
+  opacity: 1;
+  transform: translateX(2px);
+}
+.about-focus-list:has(.about-focus-item:hover)         .about-focus-item:hover .about-focus-name,
+.about-focus-list:has(.about-focus-item:focus-visible) .about-focus-item:focus-visible .about-focus-name {
+  color: rgba(255, 255, 255, .92);
+  text-shadow: 0 0 22px rgba(255, 255, 255, .16);
+}
+.about-focus-list:has(.about-focus-item:hover)         .about-focus-item:hover .about-focus-year,
+.about-focus-list:has(.about-focus-item:focus-visible) .about-focus-item:focus-visible .about-focus-year {
+  color: rgba(255, 255, 255, .62);
+}
+.about-focus-list:has(.about-focus-item:hover)         .about-focus-item:hover .about-focus-type,
+.about-focus-list:has(.about-focus-item:focus-visible) .about-focus-item:focus-visible .about-focus-type {
+  color: rgba(255, 255, 255, .48);
 }
 
 .about-studio {
