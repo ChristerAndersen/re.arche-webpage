@@ -242,12 +242,23 @@ a { text-decoration: none; color: inherit; }
 }
 
 .about-focus-label {
-  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: .14em;
+  letter-spacing: .13em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .22);
+  color: rgba(255, 255, 255, .38);
   margin-bottom: 12px;
+}
+.about-focus-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(59, 130, 246, .55);
 }
 
 .about-focus-list {
