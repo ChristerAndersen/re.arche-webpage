@@ -88,7 +88,8 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 64px;
+  padding-bottom: 13px;
+  margin-bottom: 51px;
   flex-shrink: 0;
   border-bottom: 1px solid rgba(255, 255, 255, .07);
 }
