@@ -248,6 +248,6 @@
     switchTo('home');
   });
 
-  // Set initial active state
-  setNavActive('home');
+  // No nav item active on home view
+  setNavActive(null);
 }());
