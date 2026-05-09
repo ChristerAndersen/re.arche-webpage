@@ -207,7 +207,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ─── About view content ─── */
 .about-body {
-  margin-top: 112px;
+  margin-top: 56px;
   max-width: 680px;
   display: flex;
   flex-direction: column;
