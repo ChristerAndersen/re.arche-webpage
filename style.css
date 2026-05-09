@@ -339,7 +339,7 @@ a { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: 1fr 272px;
   gap: 60px;
-  align-items: start;
+  align-items: center;
   margin-top: 112px;
 }
 
