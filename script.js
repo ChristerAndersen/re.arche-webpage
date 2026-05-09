@@ -196,3 +196,58 @@
     pill.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`;
   });
 }());
+
+// —— View router ——
+(function () {
+  const FADE = 320;
+  const viewEls = {
+    home:    document.getElementById('view-home'),
+    connect: document.getElementById('view-connect'),
+  };
+
+  let current = 'home';
+
+  function setNavActive(viewId) {
+    document.querySelectorAll('.nav-link[data-view]').forEach(l => {
+      l.classList.toggle('nav-link--active', l.dataset.view === viewId);
+    });
+  }
+
+  function switchTo(viewId) {
+    if (viewId === current || !viewEls[viewId]) return;
+    const from = viewEls[current];
+    const to   = viewEls[viewId];
+    current = viewId;
+    setNavActive(viewId);
+
+    // Fade out current
+    from.classList.add('view--fading');
+    setTimeout(() => {
+      from.classList.add('view--hidden');
+      from.classList.remove('view--fading');
+      // Prepare next at opacity 0, then reveal
+      to.style.opacity = '0';
+      to.classList.remove('view--hidden');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        to.style.opacity = '';
+      }));
+    }, FADE);
+  }
+
+  // Wire nav links
+  document.querySelectorAll('.nav-link[data-view]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      switchTo(link.dataset.view);
+    });
+  });
+
+  // Logo → home
+  document.querySelector('.logo').addEventListener('click', e => {
+    e.preventDefault();
+    switchTo('home');
+  });
+
+  // Set initial active state
+  setNavActive('home');
+}());

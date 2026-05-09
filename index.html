@@ -96,14 +96,17 @@
   <header class="header">
     <a href="/" class="logo">re.arche</a>
     <nav class="nav" aria-label="Main">
-      <a href="#apps"     class="nav-link">Apps</a>
-      <a href="#about"    class="nav-link">About</a>
-      <a href="#connect" class="nav-link">Connect</a>
+      <a href="#apps"    class="nav-link" data-view="home">Apps</a>
+      <a href="#about"   class="nav-link">About</a>
+      <a href="#connect" class="nav-link" data-view="connect">Connect</a>
     </nav>
   </header>
 
   <!-- ── Hero ── -->
   <main class="hero" id="main-content">
+
+    <!-- ── Home view ── -->
+    <div id="view-home" class="view">
 
     <!-- Eyebrow -->
     <div class="eyebrow">
@@ -170,6 +173,31 @@
       </div>
 
     </div><!-- /content-grid -->
+    </div><!-- /view-home -->
+
+    <!-- ── Connect view ── -->
+    <div id="view-connect" class="view view--hidden">
+
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Connect
+      </div>
+
+      <h1 class="headline">Let's build something<br>meaningful.</h1>
+
+      <div class="connect-body">
+        <p class="connect-text">
+          I'm open to thoughtful conversations, new ideas<br>
+          and long-term collaborations.<br>
+          If you have a project in mind, feel free to reach out.
+        </p>
+        <a class="connect-cta" href="mailto:hello@rearche.com?subject=Project%20Inquiry">
+          Start a conversation
+          <span class="cta-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+    </div><!-- /view-connect -->
 
     <!-- Scrolling brand strip -->
     <div class="marquee" aria-hidden="true">
