@@ -221,6 +221,7 @@ a { text-decoration: none; color: inherit; }
   font-weight: 400;
   color: rgba(255, 255, 255, .28);
   font-variant-numeric: tabular-nums;
+  transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project-name {
   font-size: 27px;
@@ -228,25 +229,25 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: -.016em;
   line-height: 1.08;
   color: rgba(255, 255, 255, .30);
+  transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+              text-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project-type {
   font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, .24);
   white-space: nowrap;
+  transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Active state */
-.project--active .project-year { color: rgba(255, 255, 255, .65); }
-.project--active .project-name { color: rgba(255, 255, 255, .92); font-weight: 500; }
-.project--active .project-type { color: rgba(255, 255, 255, .52); }
+/* Active state — dot only, no permanent brightness */
 
 /* ─── Project hover interaction — light follows attention ─── */
 /* Dim all rows when any is hovered/focused */
 .projects-list:has(.project:hover)       .project,
 .projects-list:has(.project:focus-visible) .project { opacity: 0.38; }
 
-/* Un-dim the attended row */
+/* Un-dim and focus the attended row */
 .projects-list:has(.project:hover)         .project:hover,
 .projects-list:has(.project:focus-visible) .project:focus-visible {
   opacity: 1;
@@ -254,13 +255,16 @@ a { text-decoration: none; color: inherit; }
 }
 .projects-list:has(.project:hover)         .project:hover .project-name,
 .projects-list:has(.project:focus-visible) .project:focus-visible .project-name {
-  text-shadow: 0 0 20px rgba(255, 255, 255, .10);
+  color: rgba(255, 255, 255, .92);
+  text-shadow: 0 0 22px rgba(255, 255, 255, .16);
 }
-
-/* Active row stays slightly brighter when another row is attended */
-.projects-list:has(.project:hover)         .project--active:not(:hover),
-.projects-list:has(.project:focus-visible) .project--active:not(:focus-visible) {
-  opacity: 0.58;
+.projects-list:has(.project:hover)         .project:hover .project-year,
+.projects-list:has(.project:focus-visible) .project:focus-visible .project-year {
+  color: rgba(255, 255, 255, .62);
+}
+.projects-list:has(.project:hover)         .project:hover .project-type,
+.projects-list:has(.project:focus-visible) .project:focus-visible .project-type {
+  color: rgba(255, 255, 255, .48);
 }
 
 /* ─── Dashboard Card atmosphere ─── */
