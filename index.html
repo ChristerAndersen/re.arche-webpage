@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>re.arche — Intelligence. Rebuilt.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────────
+       Design tokens  (re.arche v1.0)
+    ───────────────────────────────────────────── */
+    :root {
+      --bg:           #0b0c0e;
+      --midnight:     #11141b;
+      --graphite:     #16181b;
+      --steel-blue:   #3f5366;
+      --sage:         #6daf87;
+      --warm-stone:   #b7b9bc;
+      --white:        #ffffff;
+
+      --font: -apple-system, BlinkMacSystemFont,
+              "SF Pro Display", "SF Pro Text",
+              "Inter", system-ui, sans-serif;
+
+      /* Type scale */
+      --t-micro:   10.5px;
+      --t-caption: 13px;
+      --t-body:    15px;
+      --t-h3:      20px;
+      --t-h2:      clamp(1.9rem, 3.2vw, 2.75rem);
+      --t-h1:      clamp(3rem, 7.5vw, 5.5rem);
+      --t-display: clamp(4.5rem, 11vw, 9rem);
+
+      /* Spacing (8pt grid) */
+      --sp-xs:  8px;
+      --sp-sm:  16px;
+      --sp-md:  24px;
+      --sp-lg:  40px;
+      --sp-xl:  64px;
+      --sp-2xl: 96px;
+
+      /* Radius */
+      --r-chip:   8px;
+      --r-btn:    14px;
+      --r-card:   20px;
+      --r-icon:   12px;
+    }
+
+    /* ─────────────────────────────────────────────
+       Reset
+    ───────────────────────────────────────────── */
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; }
+
+    /* ─────────────────────────────────────────────
+       Film grain (fixed overlay, z above everything)
+    ───────────────────────────────────────────── */
+    #grain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .038;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 680px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Light scene layers */
+    .scene {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* 1 — Warm atmospheric haze from below */
+    .l-haze {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse 75% 60% at 50% 105%,
+        rgba(215, 192, 148, .11) 0%,
+        rgba(180, 155, 110, .055) 38%,
+        transparent 68%
+      );
+    }
+
+    /* 2 — Soft bloom around beam */
+    .l-bloom {
+      position: absolute;
+      bottom: 26%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 56%;
+      background: linear-gradient(
+        to top,
+        rgba(230, 208, 160, .20)  0%,
+        rgba(230, 208, 160, .07) 38%,
+        transparent 78%
+      );
+      filter: blur(28px);
+    }
+
+    /* 3 — Hair-thin beam core */
+    .l-beam {
+      position: absolute;
+      bottom: 26%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1.5px;
+      height: 56%;
+      background: linear-gradient(
+        to top,
+        rgba(255, 253, 244, 1.00)  0%,
+        rgba(255, 253, 244, .88)   6%,
+        rgba(255, 253, 244, .60)  22%,
+        rgba(255, 253, 244, .28)  50%,
+        rgba(255, 253, 244, .06)  78%,
+        transparent 100%
+      );
+    }
+
+    /* 4 — Horizontal surface line */
+    .l-surface {
+      position: absolute;
+      bottom: 26%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(600px, 82vw);
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 251, 235, .09)  12%,
+        rgba(255, 251, 235, .65)  35%,
+        rgba(255, 251, 235, 1.00) 50%,
+        rgba(255, 251, 235, .65)  65%,
+        rgba(255, 251, 235, .09)  88%,
+        transparent 100%
+      );
+    }
+
+    /* 5 — Dark platform face below line */
+    .l-platform {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 26%;
+      background: linear-gradient(
+        to bottom,
+        rgba(195, 172, 128, .04) 0%,
+        rgba(9, 9, 11, .72) 48%,
+        #08080a 100%
+      );
+    }
+
+    /* 6 — Corner vignettes */
+    .l-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 55% at 50% 0%,   transparent 52%, rgba(9,9,11,.45) 100%),
+        radial-gradient(ellipse 40% 100% at 0% 50%,   rgba(9,9,11,.35) 0%, transparent 75%),
+        radial-gradient(ellipse 40% 100% at 100% 50%, rgba(9,9,11,.35) 0%, transparent 75%);
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 36px 52px;
+      animation: fadeUp .9s ease .05s both;
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: -.015em;
+      color: rgba(255,255,255,.88);
+    }
+    .logo:hover { color: #fff; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: var(--t-micro);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.36);
+      position: relative;
+      transition: color .25s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: rgba(255,255,255,.45);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover { color: rgba(255,255,255,.80); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Hero text ── */
+    .hero-body {
+      position: relative;
+      z-index: 20;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 52px 76px;
+    }
+
+    .hero-eyebrow {
+      font-size: var(--t-micro);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: rgba(255,255,255,.28);
+      margin-bottom: 20px;
+      animation: fadeUp .9s ease .28s both;
+    }
+
+    .hero-h1 {
+      font-size: var(--t-h1);
+      font-weight: 300;
+      line-height: 1.035;
+      letter-spacing: -.026em;
+      color: rgba(255,255,255,.90);
+      max-width: 660px;
+      margin-bottom: 44px;
+      animation: fadeUp .9s ease .44s both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: var(--t-micro);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.38);
+      transition: color .25s;
+      animation: fadeUp .9s ease .60s both;
+      width: fit-content;
+    }
+    .hero-cta svg { transition: transform .25s; flex-shrink: 0; }
+    .hero-cta:hover { color: rgba(255,255,255,.75); }
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    /* ─────────────────────────────────────────────
+       MARQUEE
+    ───────────────────────────────────────────── */
+    .marquee-wrap {
+      border-top: 1px solid rgba(255,255,255,.055);
+      border-bottom: 1px solid rgba(255,255,255,.055);
+      overflow: hidden;
+      padding: 15px 0;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 32s linear infinite;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 0 36px;
+    }
+    .marquee-item span {
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: rgba(255,255,255,.20);
+      white-space: nowrap;
+    }
+    .mdot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(109,175,135,.55);
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─────────────────────────────────────────────
+       Shared section chrome
+    ───────────────────────────────────────────── */
+    .section {
+      padding: var(--sp-2xl) 52px;
+      border-top: 1px solid rgba(255,255,255,.055);
+    }
+    .wrap { max-width: 1140px; margin: 0 auto; }
+
+    .sec-label {
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: rgba(255,255,255,.22);
+      margin-bottom: var(--sp-xl);
+    }
+
+    /* ─────────────────────────────────────────────
+       APPS — bento grid
+    ───────────────────────────────────────────── */
+    .apps-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-md);
+      margin-bottom: 44px;
+    }
+    .apps-h2 {
+      font-size: var(--t-h2);
+      font-weight: 300;
+      letter-spacing: -.022em;
+      line-height: 1.1;
+      color: rgba(255,255,255,.86);
+    }
+    .link-quiet {
+      font-size: var(--t-micro);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.24);
+      transition: color .25s;
+    }
+    .link-quiet:hover { color: rgba(255,255,255,.60); }
+
+    /* Bento container */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: rgba(255,255,255,.055);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+
+    .card {
+      background: var(--bg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-md);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background .4s;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%,
+        rgba(255,255,255,.028) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .card:hover { background: rgba(255,255,255,.014); }
+    .card:hover::after { opacity: 1; }
+
+    /* Featured card spans 2 columns */
+    .card--featured {
+      grid-column: 1 / 3;
+      flex-direction: row;
+      align-items: center;
+      gap: 52px;
+      padding: 52px;
+    }
+    .card--featured .card-body { flex: 1; min-width: 0; }
+    .card--featured .card-visual {
+      flex-shrink: 0;
+      width: 190px;
+      height: 134px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(
+        140deg,
+        rgba(63,83,102,.35) 0%,
+        rgba(11,12,14,.9) 100%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-num {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .10em;
+      color: rgba(255,255,255,.16);
+    }
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--r-icon);
+      border: 1px solid rgba(255,255,255,.09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-title {
+      font-size: var(--t-h3);
+      font-weight: 400;
+      letter-spacing: -.012em;
+      color: rgba(255,255,255,.82);
+    }
+    .card-desc {
+      font-size: var(--t-caption);
+      font-weight: 300;
+      line-height: 1.68;
+      color: rgba(255,255,255,.30);
+    }
+    .card-platform {
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: rgba(255,255,255,.18);
+      margin-top: auto;
+    }
+    .card-soon {
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: rgba(109,175,135,.48);
+      margin-top: auto;
+    }
+
+    /* Dim future cards */
+    .card--dim { opacity: .42; }
+
+    /* Stay-close card */
+    .card--cta {
+      background: rgba(109,175,135,.035);
+      justify-content: space-between;
+    }
+    .card--cta:hover { background: rgba(109,175,135,.06); }
+
+    /* ─────────────────────────────────────────────
+       ABOUT — manifesto
+    ───────────────────────────────────────────── */
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 88px;
+      align-items: start;
+    }
+    .manifesto-h2 {
+      font-size: var(--t-h2);
+      font-weight: 300;
+      letter-spacing: -.022em;
+      line-height: 1.08;
+      color: rgba(255,255,255,.86);
+    }
+    .manifesto-h2 em {
+      font-style: italic;
+      color: rgba(255,255,255,.42);
+    }
+
+    .v-strip {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      margin-top: var(--sp-xl);
+      padding-top: var(--sp-lg);
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .v-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.18);
+    }
+    .v-badge {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: rgba(109,175,135,.65);
+      background: rgba(109,175,135,.09);
+      border: 1px solid rgba(109,175,135,.20);
+      border-radius: var(--r-chip);
+      padding: 3px 10px;
+    }
+
+    .manifesto-body p {
+      font-size: var(--t-body);
+      font-weight: 300;
+      line-height: 1.78;
+      color: rgba(255,255,255,.36);
+      margin-bottom: 18px;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 44px;
+      margin-top: var(--sp-lg);
+    }
+    .principle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pdot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(109,175,135,.60);
+      flex-shrink: 0;
+    }
+    .principle span {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,.26);
+    }
+
+    /* ─────────────────────────────────────────────
+       CONTACT
+    ───────────────────────────────────────────── */
+    .contact-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 52px;
+    }
+    .contact-h2 {
+      font-size: var(--t-display);
+      font-weight: 200;
+      letter-spacing: -.045em;
+      line-height: .92;
+      color: rgba(255,255,255,.84);
+    }
+    .contact-aside {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-md);
+      padding-bottom: 6px;
+    }
+    .contact-email {
+      font-size: var(--t-body);
+      font-weight: 300;
+      letter-spacing: .01em;
+      color: rgba(255,255,255,.36);
+      transition: color .25s;
+    }
+    .contact-email:hover { color: rgba(255,255,255,.82); }
+    .contact-socials {
+      display: flex;
+      gap: var(--sp-md);
+    }
+    .contact-socials a {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.18);
+      transition: color .25s;
+    }
+    .contact-socials a:hover { color: rgba(255,255,255,.52); }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.055);
+      padding: 28px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer span {
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,.14);
+      letter-spacing: .04em;
+    }
+
+    /* ─────────────────────────────────────────────
+       Animations
+    ───────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────────
+       Responsive
+    ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .nav, .hero-body, .section { padding-left: 24px; padding-right: 24px; }
+      .bento { grid-template-columns: 1fr; }
+      .card--featured {
+        grid-column: 1;
+        flex-direction: column;
+        gap: var(--sp-md);
+        padding: 36px;
+      }
+      .card--featured .card-visual { width: 100%; height: 90px; }
+      .manifesto-grid { grid-template-columns: 1fr; gap: 44px; }
+      .principles { grid-template-columns: 1fr; }
+      footer { padding: 28px 24px; flex-direction: column; gap: 8px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Film grain -->
+<div id="grain" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="hero">
+
+  <!-- Cinematic light scene -->
+  <div class="scene" aria-hidden="true">
+    <div class="l-haze"></div>
+    <div class="l-bloom"></div>
+    <div class="l-beam"></div>
+    <div class="l-surface"></div>
+    <div class="l-platform"></div>
+    <div class="l-vignette"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/" class="logo">re.arche</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero copy -->
+  <div class="hero-body">
+    <p class="hero-eyebrow">Intelligence. Rebuilt.</p>
+    <h1 class="hero-h1">Better apps.<br>Less noise.</h1>
+    <a href="#apps" class="hero-cta">
+      Explore apps
+      <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+        <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor"
+              stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     MARQUEE TICKER
+═══════════════════════════════════════════════ -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- set A -->
+    <div class="marquee-item"><span>Built from first principles</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Clarity over complexity</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Depth over noise</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Systems with depth</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Intelligence. Rebuilt.</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Precision over decoration</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Timeless over trends</span><span class="mdot"></span></div>
+    <!-- set B — identical for seamless loop -->
+    <div class="marquee-item"><span>Built from first principles</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Clarity over complexity</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Depth over noise</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Systems with depth</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Intelligence. Rebuilt.</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Precision over decoration</span><span class="mdot"></span></div>
+    <div class="marquee-item"><span>Timeless over trends</span><span class="mdot"></span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     APPS
+═══════════════════════════════════════════════ -->
+<section class="section" id="apps">
+  <div class="wrap">
+
+    <p class="sec-label">01 — Selected work</p>
+
+    <div class="apps-header">
+      <h2 class="apps-h2">Every product,<br>built from zero.</h2>
+      <a href="#" class="link-quiet">View all →</a>
+    </div>
+
+    <div class="bento" role="list">
+
+      <!-- ─ Featured: Focus ─ -->
+      <article class="card card--featured" role="listitem">
+        <div class="card-body">
+          <p class="card-num">01</p>
+          <div class="card-icon" style="background: rgba(63,83,102,.25); margin-top: 12px;">
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+              <circle cx="9.5" cy="9.5" r="5.5" stroke="rgba(255,255,255,.46)" stroke-width="1.1"/>
+              <path d="M9.5 7v2.5l1.5.9" stroke="rgba(255,255,255,.46)"
+                    stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="card-title" style="margin-top: 18px;">Focus</h3>
+          <p class="card-desc" style="margin-top: 6px;">Deep work timer with intentional distraction blocking. Designed for sustained output without compromise — no gamification, no noise.</p>
+          <span class="card-platform" style="margin-top: 28px;">iOS · macOS →</span>
+        </div>
+        <div class="card-visual" aria-hidden="true">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+            <circle cx="26" cy="26" r="20" stroke="rgba(255,255,255,.10)" stroke-width=".8"/>
+            <circle cx="26" cy="26" r="13" stroke="rgba(255,255,255,.07)" stroke-width=".8"/>
+            <circle cx="26" cy="26" r="5"  stroke="rgba(255,255,255,.12)" stroke-width=".8"/>
+            <path d="M26 15v11l6.5 3.5" stroke="rgba(255,255,255,.28)"
+                  stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </article>
+
+      <!-- ─ Drift ─ -->
+      <article class="card" role="listitem">
+        <p class="card-num">02</p>
+        <div class="card-icon" style="background: rgba(109,175,135,.12); margin-top: 12px;">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+            <path d="M2.5 13.5C5 9.5 7.5 8 9.5 10.5C11.5 13 14 7 16.5 9.5"
+                  stroke="rgba(109,175,135,.72)" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="card-title" style="margin-top: 18px;">Drift</h3>
+        <p class="card-desc" style="margin-top: 6px;">Ambient sound environments for concentration, creativity, and calm.</p>
+        <span class="card-platform">iOS →</span>
+      </article>
+
+      <!-- ─ Unnamed ─ -->
+      <article class="card card--dim" role="listitem" aria-label="In development">
+        <p class="card-num">03</p>
+        <div class="card-icon" style="background: rgba(255,255,255,.04); margin-top: 12px;">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+            <rect x="7" y="7" width="5" height="5" stroke="rgba(255,255,255,.22)" stroke-width="1.1"/>
+          </svg>
+        </div>
+        <h3 class="card-title" style="margin-top: 18px; color: rgba(255,255,255,.42);">Unnamed</h3>
+        <p class="card-desc" style="margin-top: 6px; color: rgba(255,255,255,.18);">Something precise is being crafted. Built to the same standard.</p>
+        <span class="card-soon">In development</span>
+      </article>
+
+      <!-- ─ Placeholder ─ -->
+      <article class="card card--dim" role="listitem" aria-label="Planned">
+        <p class="card-num">04</p>
+        <div class="card-icon" style="background: rgba(255,255,255,.04); margin-top: 12px;">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+            <path d="M9.5 4v11M4 9.5h11" stroke="rgba(255,255,255,.18)"
+                  stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="card-title" style="margin-top: 18px; color: rgba(255,255,255,.32);">—</h3>
+        <p class="card-desc" style="margin-top: 6px; color: rgba(255,255,255,.15);">More is in the pipeline.</p>
+        <span class="card-soon">Planned</span>
+      </article>
+
+      <!-- ─ Stay close ─ -->
+      <article class="card card--cta" role="listitem">
+        <div>
+          <div style="width:3px;height:3px;border-radius:50%;background:rgba(109,175,135,.5);margin-bottom:20px;"></div>
+          <p style="font-size:12px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.26);max-width:180px;">
+            More products are on the way. Stay close.
+          </p>
+        </div>
+        <a href="#contact" class="link-quiet" style="color:rgba(109,175,135,.48);font-size:10px;letter-spacing:.12em;">
+          Get notified →
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     ABOUT — Manifesto
+═══════════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="wrap">
+
+    <p class="sec-label">02 — Philosophy</p>
+
+    <div class="manifesto-grid">
+
+      <div>
+        <h2 class="manifesto-h2">
+          One studio.<br>
+          <em>One&nbsp;standard.</em><br>
+          No exceptions.
+        </h2>
+        <div class="v-strip">
+          <span class="v-label">Visual Identity System · v1.0</span>
+          <span class="v-badge">2026</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="manifesto-body">
+          <p>re.arche is an independent software studio. We build products that think precisely and behave predictably — tools that strip away everything that does not earn its place.</p>
+          <p>No templates. No compromises. No noise. Every interface, interaction, and decision is derived from first principles.</p>
+          <p>Based in Norway. Shipping to the world.</p>
+        </div>
+
+        <div class="principles">
+          <div class="principle"><div class="pdot"></div><span>Clarity over complexity</span></div>
+          <div class="principle"><div class="pdot"></div><span>Systems over screens</span></div>
+          <div class="principle"><div class="pdot"></div><span>Depth over noise</span></div>
+          <div class="principle"><div class="pdot"></div><span>Precision over decoration</span></div>
+          <div class="principle"><div class="pdot"></div><span>Timeless over trends</span></div>
+          <div class="principle"><div class="pdot"></div><span>Where intelligence begins</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="wrap">
+
+    <p class="sec-label">03 — Contact</p>
+
+    <div class="contact-inner">
+      <h2 class="contact-h2">Say<br>hello.</h2>
+
+      <div class="contact-aside">
+        <a href="mailto:hello@re.arche.com" class="contact-email">
+          hello@re.arche.com
+        </a>
+        <div class="contact-socials">
+          <a href="#">X</a>
+          <a href="#">GitHub</a>
+          <a href="#">Dribbble</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer>
+  <span>re.arche · Intelligence. Rebuilt.</span>
+  <span>© 2026 · Built from first principles</span>
+</footer>
+
+</body>
+</html>
