@@ -14,34 +14,93 @@
   <svg class="bg-arche" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <radialGradient id="og" cx="50%" cy="50%" r="50%">
-        <stop offset="0%"   stop-color="rgba(63,100,160,.14)"/>
-        <stop offset="55%"  stop-color="rgba(40,70,120,.05)"/>
+        <stop offset="0%"   stop-color="rgba(50,90,160,.13)"/>
+        <stop offset="55%"  stop-color="rgba(30,60,120,.04)"/>
         <stop offset="100%" stop-color="transparent"/>
       </radialGradient>
     </defs>
+
     <!-- Ambient fill -->
     <circle cx="350" cy="350" r="340" fill="url(#og)"/>
-    <!-- Concentric rings -->
-    <circle cx="350" cy="350" r="330" stroke="rgba(255,255,255,.035)" stroke-width="1"/>
-    <circle cx="350" cy="350" r="270" stroke="rgba(255,255,255,.042)" stroke-width="1"/>
-    <circle cx="350" cy="350" r="210" stroke="rgba(255,255,255,.050)" stroke-width="1"/>
-    <circle cx="350" cy="350" r="150" stroke="rgba(255,255,255,.058)" stroke-width="1"/>
-    <circle cx="350" cy="350" r="90"  stroke="rgba(100,140,200,.10)"  stroke-width="1"/>
-    <circle cx="350" cy="350" r="30"  stroke="rgba(100,140,200,.16)"  stroke-width="1.2"/>
+
+    <!-- Rings: outer → inner -->
+    <circle cx="350" cy="350" r="320" stroke="rgba(255,255,255,.038)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="270" stroke="rgba(255,255,255,.046)" stroke-width=".8" stroke-dasharray="3 9"/>
+    <circle cx="350" cy="350" r="220" stroke="rgba(255,255,255,.054)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="165" stroke="rgba(255,255,255,.062)" stroke-width=".8" stroke-dasharray="2 7"/>
+    <circle cx="350" cy="350" r="110" stroke="rgba(100,145,210,.11)"  stroke-width="1"/>
+    <circle cx="350" cy="350" r="60"  stroke="rgba(100,145,210,.16)"  stroke-width="1"/>
+    <circle cx="350" cy="350" r="22"  stroke="rgba(100,155,225,.20)"  stroke-width="1.2"/>
+
     <!-- Cross axes -->
-    <line x1="350" y1="20"  x2="350" y2="680" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
-    <line x1="20"  y1="350" x2="680" y2="350" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
-    <!-- Diagonal guides -->
-    <line x1="116" y1="116" x2="584" y2="584" stroke="rgba(255,255,255,.016)" stroke-width="1"/>
-    <line x1="584" y1="116" x2="116" y2="584" stroke="rgba(255,255,255,.016)" stroke-width="1"/>
-    <!-- Cardinal tick marks -->
-    <line x1="350" y1="20"  x2="350" y2="42"  stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
-    <line x1="350" y1="658" x2="350" y2="680" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
-    <line x1="20"  y1="350" x2="42"  y2="350" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
-    <line x1="658" y1="350" x2="680" y2="350" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="350" y1="10"  x2="350" y2="690" stroke="rgba(255,255,255,.022)" stroke-width="1"/>
+    <line x1="10"  y1="350" x2="690" y2="350" stroke="rgba(255,255,255,.022)" stroke-width="1"/>
+
+    <!-- Diagonals -->
+    <line x1="124" y1="124" x2="576" y2="576" stroke="rgba(255,255,255,.014)" stroke-width="1"/>
+    <line x1="576" y1="124" x2="124" y2="576" stroke="rgba(255,255,255,.014)" stroke-width="1"/>
+
+    <!-- Cardinal ticks -->
+    <line x1="350" y1="10"  x2="350" y2="32"  stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+    <line x1="350" y1="668" x2="350" y2="690" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+    <line x1="10"  y1="350" x2="32"  y2="350" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+    <line x1="668" y1="350" x2="690" y2="350" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+
+    <!-- Glow dots — ring r320, top -->
+    <g class="gd" style="animation-delay:0s">
+      <circle cx="350" cy="30"  r="7"   fill="rgba(80,140,255,.08)"/>
+      <circle cx="350" cy="30"  r="2.5" fill="rgba(150,200,255,.78)"/>
+    </g>
+    <!-- r320, top-right 45° -->
+    <g class="gd" style="animation-delay:-1.8s">
+      <circle cx="576" cy="124" r="6"   fill="rgba(80,140,255,.07)"/>
+      <circle cx="576" cy="124" r="2"   fill="rgba(150,200,255,.65)"/>
+    </g>
+    <!-- r320, right -->
+    <g class="gd" style="animation-delay:-3.5s">
+      <circle cx="670" cy="350" r="6"   fill="rgba(80,140,255,.07)"/>
+      <circle cx="670" cy="350" r="2"   fill="rgba(150,200,255,.60)"/>
+    </g>
+    <!-- r270, top -->
+    <g class="gd" style="animation-delay:-5.2s">
+      <circle cx="350" cy="80"  r="5.5" fill="rgba(80,140,255,.07)"/>
+      <circle cx="350" cy="80"  r="2"   fill="rgba(150,200,255,.58)"/>
+    </g>
+    <!-- r220, right -->
+    <g class="gd" style="animation-delay:-7.0s">
+      <circle cx="570" cy="350" r="5.5" fill="rgba(80,140,255,.07)"/>
+      <circle cx="570" cy="350" r="2"   fill="rgba(150,200,255,.62)"/>
+    </g>
+    <!-- r220, top-left -->
+    <g class="gd" style="animation-delay:-2.4s">
+      <circle cx="194" cy="194" r="5"   fill="rgba(80,140,255,.06)"/>
+      <circle cx="194" cy="194" r="1.8" fill="rgba(150,200,255,.55)"/>
+    </g>
+    <!-- r165, top -->
+    <g class="gd" style="animation-delay:-4.6s">
+      <circle cx="350" cy="185" r="5"   fill="rgba(80,140,255,.07)"/>
+      <circle cx="350" cy="185" r="1.8" fill="rgba(150,200,255,.55)"/>
+    </g>
+    <!-- r110, right -->
+    <g class="gd" style="animation-delay:-6.4s">
+      <circle cx="460" cy="350" r="4.5" fill="rgba(80,140,255,.07)"/>
+      <circle cx="460" cy="350" r="1.8" fill="rgba(150,200,255,.55)"/>
+    </g>
+    <!-- r60, top -->
+    <g class="gd" style="animation-delay:-8.1s">
+      <circle cx="350" cy="290" r="4"   fill="rgba(80,140,255,.07)"/>
+      <circle cx="350" cy="290" r="1.8" fill="rgba(150,200,255,.55)"/>
+    </g>
+
     <!-- Origin point -->
-    <circle cx="350" cy="350" r="2.5" fill="rgba(100,150,220,.45)"/>
-    <circle cx="350" cy="350" r="5"   stroke="rgba(100,150,220,.18)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="3"   fill="rgba(110,160,230,.55)"/>
+    <circle cx="350" cy="350" r="6.5" stroke="rgba(100,155,225,.22)" stroke-width="1" fill="none"/>
+
+    <!-- Orbiting tracer on ring r=220 -->
+    <g class="orbit-tracer">
+      <circle cx="570" cy="350" r="2.8" fill="rgba(130,190,255,.80)"/>
+      <circle cx="570" cy="350" r="7"   fill="rgba(80,140,255,.09)"/>
+    </g>
   </svg>
 </div>
 
@@ -74,7 +133,10 @@
 
       <!-- Selected Projects -->
       <section class="projects" aria-label="Selected projects">
-        <h2 class="projects-label">Selected Projects</h2>
+        <h2 class="projects-label">
+          <span class="projects-label-dot" aria-hidden="true"></span>
+          Selected Projects
+        </h2>
         <ul class="projects-list">
           <li class="project">
             <span class="project-dot" aria-hidden="true"></span>

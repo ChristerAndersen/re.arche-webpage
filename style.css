@@ -164,14 +164,25 @@ a { text-decoration: none; color: inherit; }
 
 /* ─── Selected Projects ─── */
 .projects-label {
-  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: .15em;
+  letter-spacing: .13em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .28);
+  color: rgba(255, 255, 255, .38);
   padding-bottom: 13px;
   border-bottom: 1px solid rgba(255, 255, 255, .07);
   margin-bottom: 2px;
+}
+.projects-label-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(59, 130, 246, .55);
 }
 
 .projects-list { list-style: none; }
