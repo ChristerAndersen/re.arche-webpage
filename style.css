@@ -24,49 +24,31 @@ a { text-decoration: none; color: inherit; }
   overflow: hidden;
 }
 
-/* Planet body with atmospheric rim */
-.bg-earth {
+/* Subtle ambient glow — bottom right */
+.bg-glow {
   position: absolute;
-  right: -10%;
-  bottom: -46%;
-  width: min(860px, 65vw);
-  height: min(860px, 65vw);
-  border-radius: 50%;
-  background:
-    /* Atmospheric rim — blue-white glow on upper-left edge */
-    radial-gradient(
-      ellipse 68% 26% at 38% 18%,
-      rgba(130, 200, 255, .22) 0%,
-      rgba(70,  145, 250, .11) 28%,
-      transparent               52%
-    ),
-    /* Planet body */
-    radial-gradient(
-      circle at 48% 46%,
-      #1c3055 0%,
-      #101e3a 22%,
-      #090f24 52%,
-      #050a17 100%
-    );
-  box-shadow:
-    0 0  60px rgba(30,  80, 200, .16),
-    0 0 140px rgba(18,  55, 160, .08);
+  bottom: -5%;
+  right: -5%;
+  width: min(700px, 55vw);
+  height: min(600px, 50vw);
+  background: radial-gradient(
+    ellipse at 65% 80%,
+    rgba(40, 80, 160, .09) 0%,
+    rgba(25, 55, 130, .04) 45%,
+    transparent             72%
+  );
+  filter: blur(60px);
+  pointer-events: none;
 }
 
-/* Diffuse blue atmospheric spread above the planet */
-.bg-diffuse {
+/* Origin diagram — ἀρχή */
+.bg-arche {
   position: absolute;
-  right: -6%;
-  bottom: -4%;
-  width: min(1000px, 75vw);
-  height: min(520px, 45vw);
-  background: radial-gradient(
-    ellipse at 62% 88%,
-    rgba(28, 76, 200, .13) 0%,
-    rgba(18, 58, 158, .06) 40%,
-    transparent             70%
-  );
-  filter: blur(48px);
+  bottom: -32%;
+  right: -10%;
+  width: min(680px, 52vw);
+  height: min(680px, 52vw);
+  opacity: .9;
 }
 
 /* ─── Page shell ─── */

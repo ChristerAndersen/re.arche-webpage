@@ -8,10 +8,41 @@
 </head>
 <body>
 
-<!-- Background scene: deep space + planet horizon -->
+<!-- Background: origin diagram — ἀρχή -->
 <div class="bg" aria-hidden="true">
-  <div class="bg-earth"></div>
-  <div class="bg-diffuse"></div>
+  <div class="bg-glow"></div>
+  <svg class="bg-arche" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="og" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stop-color="rgba(63,100,160,.14)"/>
+        <stop offset="55%"  stop-color="rgba(40,70,120,.05)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <!-- Ambient fill -->
+    <circle cx="350" cy="350" r="340" fill="url(#og)"/>
+    <!-- Concentric rings -->
+    <circle cx="350" cy="350" r="330" stroke="rgba(255,255,255,.035)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="270" stroke="rgba(255,255,255,.042)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="210" stroke="rgba(255,255,255,.050)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="150" stroke="rgba(255,255,255,.058)" stroke-width="1"/>
+    <circle cx="350" cy="350" r="90"  stroke="rgba(100,140,200,.10)"  stroke-width="1"/>
+    <circle cx="350" cy="350" r="30"  stroke="rgba(100,140,200,.16)"  stroke-width="1.2"/>
+    <!-- Cross axes -->
+    <line x1="350" y1="20"  x2="350" y2="680" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
+    <line x1="20"  y1="350" x2="680" y2="350" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
+    <!-- Diagonal guides -->
+    <line x1="116" y1="116" x2="584" y2="584" stroke="rgba(255,255,255,.016)" stroke-width="1"/>
+    <line x1="584" y1="116" x2="116" y2="584" stroke="rgba(255,255,255,.016)" stroke-width="1"/>
+    <!-- Cardinal tick marks -->
+    <line x1="350" y1="20"  x2="350" y2="42"  stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="350" y1="658" x2="350" y2="680" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="20"  y1="350" x2="42"  y2="350" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <line x1="658" y1="350" x2="680" y2="350" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+    <!-- Origin point -->
+    <circle cx="350" cy="350" r="2.5" fill="rgba(100,150,220,.45)"/>
+    <circle cx="350" cy="350" r="5"   stroke="rgba(100,150,220,.18)" stroke-width="1"/>
+  </svg>
 </div>
 
 <div class="page">
