@@ -69,7 +69,7 @@
     a { text-decoration: none; }
 
     /* ─────────────────────────────────────────────
-       Film grain (fixed overlay, z above everything)
+       Film grain (fixed overlay)
     ───────────────────────────────────────────── */
     #grain {
       position: fixed;
@@ -272,6 +272,13 @@
       animation: fadeUp .9s ease .44s both;
     }
 
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      animation: fadeUp .9s ease .60s both;
+    }
+
     .hero-cta {
       display: inline-flex;
       align-items: center;
@@ -282,12 +289,21 @@
       letter-spacing: .12em;
       color: rgba(255,255,255,.38);
       transition: color .25s;
-      animation: fadeUp .9s ease .60s both;
       width: fit-content;
     }
     .hero-cta svg { transition: transform .25s; flex-shrink: 0; }
     .hero-cta:hover { color: rgba(255,255,255,.75); }
     .hero-cta:hover svg { transform: translateX(4px); }
+
+    .hero-cta-secondary {
+      font-size: var(--t-micro);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.18);
+      transition: color .25s;
+    }
+    .hero-cta-secondary:hover { color: rgba(255,255,255,.48); }
 
     /* ─────────────────────────────────────────────
        MARQUEE
@@ -476,15 +492,230 @@
       margin-top: auto;
     }
 
-    /* Dim future cards */
     .card--dim { opacity: .42; }
 
-    /* Stay-close card */
     .card--cta {
       background: rgba(109,175,135,.035);
       justify-content: space-between;
     }
     .card--cta:hover { background: rgba(109,175,135,.06); }
+
+    /* ─────────────────────────────────────────────
+       SHOWCASE — Dashboard mockup
+    ───────────────────────────────────────────── */
+    .showcase-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .showcase-copy {}
+    .showcase-h2 {
+      font-size: var(--t-h2);
+      font-weight: 300;
+      letter-spacing: -.022em;
+      line-height: 1.08;
+      color: rgba(255,255,255,.86);
+      margin-bottom: 20px;
+    }
+    .showcase-h2 em {
+      font-style: italic;
+      color: rgba(255,255,255,.38);
+    }
+    .showcase-p {
+      font-size: var(--t-body);
+      font-weight: 300;
+      line-height: 1.78;
+      color: rgba(255,255,255,.34);
+      margin-bottom: 36px;
+      max-width: 400px;
+    }
+
+    /* Dashboard card mockup */
+    .dash {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(22,24,27,.85);
+      padding: 28px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        0 32px 80px rgba(0,0,0,.55),
+        0 8px 24px rgba(0,0,0,.35);
+    }
+
+    /* Soft blue glow behind card */
+    .dash::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 320px; height: 220px;
+      background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(63,83,102,.38) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .dash-title {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .02em;
+      color: rgba(255,255,255,.72);
+    }
+    .dash-badge {
+      font-size: 9px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: rgba(109,175,135,.65);
+      background: rgba(109,175,135,.09);
+      border: 1px solid rgba(109,175,135,.20);
+      border-radius: 6px;
+      padding: 3px 9px;
+    }
+
+    .dash-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .metric {
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .metric-label {
+      font-size: 9px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: rgba(255,255,255,.26);
+      margin-bottom: 8px;
+    }
+    .metric-value {
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: -.03em;
+      color: rgba(255,255,255,.84);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-delta {
+      font-size: 10px;
+      font-weight: 400;
+      color: rgba(109,175,135,.80);
+    }
+    .metric-delta--neg { color: rgba(255,100,100,.60); }
+
+    /* Minimal SVG chart */
+    .dash-chart-wrap {
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.055);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .dash-chart-label {
+      font-size: 9px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: rgba(255,255,255,.22);
+      margin-bottom: 12px;
+    }
+    .dash-chart-svg {
+      width: 100%;
+      height: 64px;
+      display: block;
+      overflow: visible;
+    }
+
+    /* ─────────────────────────────────────────────
+       PROCESS
+    ───────────────────────────────────────────── */
+    .process-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-md);
+      margin-bottom: 56px;
+    }
+    .process-h2 {
+      font-size: var(--t-h2);
+      font-weight: 300;
+      letter-spacing: -.022em;
+      line-height: 1.08;
+      color: rgba(255,255,255,.86);
+    }
+    .process-sub {
+      font-size: var(--t-body);
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,.28);
+      max-width: 340px;
+      text-align: right;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.055);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+
+    .step {
+      background: var(--bg);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      transition: background .35s;
+      cursor: default;
+    }
+    .step:hover { background: rgba(255,255,255,.018); }
+
+    .step-num {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.18);
+    }
+
+    .step-line {
+      width: 24px; height: 1px;
+      background: rgba(255,255,255,.10);
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: -.015em;
+      color: rgba(255,255,255,.78);
+    }
+
+    .step-desc {
+      font-size: var(--t-caption);
+      font-weight: 300;
+      line-height: 1.72;
+      color: rgba(255,255,255,.28);
+      margin-top: auto;
+    }
 
     /* ─────────────────────────────────────────────
        ABOUT — manifesto
@@ -564,6 +795,86 @@
     }
 
     /* ─────────────────────────────────────────────
+       FINAL CTA
+    ───────────────────────────────────────────── */
+    .final-cta {
+      padding: 120px 52px;
+      border-top: 1px solid rgba(255,255,255,.055);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(
+        ellipse at 50% 100%,
+        rgba(109,175,135,.07) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .final-cta-h2 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 200;
+      letter-spacing: -.04em;
+      line-height: 1.05;
+      color: rgba(255,255,255,.84);
+      margin-bottom: 20px;
+    }
+
+    .final-cta-p {
+      font-size: var(--t-body);
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,.28);
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--r-btn);
+      font-size: var(--t-micro);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.72);
+      cursor: pointer;
+      transition: background .3s, border-color .3s, color .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%,
+        rgba(255,255,255,.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .btn-primary:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.20);
+      color: rgba(255,255,255,.92);
+      box-shadow: 0 8px 32px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary svg { transition: transform .25s; flex-shrink: 0; }
+    .btn-primary:hover svg { transform: translateX(3px); }
+
+    /* ─────────────────────────────────────────────
        CONTACT
     ───────────────────────────────────────────── */
     .contact-inner {
@@ -632,6 +943,17 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* Scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ─────────────────────────────────────────────
        Responsive
     ───────────────────────────────────────────── */
@@ -647,7 +969,20 @@
       .card--featured .card-visual { width: 100%; height: 90px; }
       .manifesto-grid { grid-template-columns: 1fr; gap: 44px; }
       .principles { grid-template-columns: 1fr; }
+      .showcase-inner { grid-template-columns: 1fr; gap: 48px; }
+      .showcase-p { max-width: none; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-sub { text-align: left; }
+      .dash-metrics { grid-template-columns: 1fr 1fr; }
+      .final-cta { padding: 80px 24px; }
       footer { padding: 28px 24px; flex-direction: column; gap: 8px; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .process-steps { grid-template-columns: 1fr; }
+      .dash-metrics { grid-template-columns: 1fr; }
+      .nav { padding: 28px 24px; }
+      .nav-links { gap: 20px; }
     }
   </style>
 </head>
@@ -676,7 +1011,8 @@
     <a href="/" class="logo">re.arche</a>
     <ul class="nav-links" role="list">
       <li><a href="#apps">Apps</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#principles">Principles</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -685,13 +1021,16 @@
   <div class="hero-body">
     <p class="hero-eyebrow">Intelligence. Rebuilt.</p>
     <h1 class="hero-h1">Better apps.<br>Less noise.</h1>
-    <a href="#apps" class="hero-cta">
-      Explore apps
-      <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
-        <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor"
-              stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
+    <div class="hero-actions">
+      <a href="#apps" class="hero-cta">
+        Explore work
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+          <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor"
+                stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#contact" class="hero-cta-secondary">Contact</a>
+    </div>
   </div>
 
 </section>
@@ -702,7 +1041,6 @@
 ═══════════════════════════════════════════════ -->
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
-    <!-- set A -->
     <div class="marquee-item"><span>Built from first principles</span><span class="mdot"></span></div>
     <div class="marquee-item"><span>Clarity over complexity</span><span class="mdot"></span></div>
     <div class="marquee-item"><span>Depth over noise</span><span class="mdot"></span></div>
@@ -710,7 +1048,6 @@
     <div class="marquee-item"><span>Intelligence. Rebuilt.</span><span class="mdot"></span></div>
     <div class="marquee-item"><span>Precision over decoration</span><span class="mdot"></span></div>
     <div class="marquee-item"><span>Timeless over trends</span><span class="mdot"></span></div>
-    <!-- set B — identical for seamless loop -->
     <div class="marquee-item"><span>Built from first principles</span><span class="mdot"></span></div>
     <div class="marquee-item"><span>Clarity over complexity</span><span class="mdot"></span></div>
     <div class="marquee-item"><span>Depth over noise</span><span class="mdot"></span></div>
@@ -728,14 +1065,14 @@
 <section class="section" id="apps">
   <div class="wrap">
 
-    <p class="sec-label">01 — Selected work</p>
+    <p class="sec-label reveal">01 — Selected work</p>
 
-    <div class="apps-header">
+    <div class="apps-header reveal">
       <h2 class="apps-h2">Every product,<br>built from zero.</h2>
       <a href="#" class="link-quiet">View all →</a>
     </div>
 
-    <div class="bento" role="list">
+    <div class="bento reveal" role="list">
 
       <!-- ─ Featured: Focus ─ -->
       <article class="card card--featured" role="listitem">
@@ -823,14 +1160,139 @@
 
 
 <!-- ══════════════════════════════════════════════
-     ABOUT — Manifesto
+     SHOWCASE — Dashboard
 ═══════════════════════════════════════════════ -->
-<section class="section" id="about">
+<section class="section">
   <div class="wrap">
 
-    <p class="sec-label">02 — Philosophy</p>
+    <p class="sec-label reveal">02 — Craftsmanship</p>
 
-    <div class="manifesto-grid">
+    <div class="showcase-inner reveal">
+
+      <div class="showcase-copy">
+        <h2 class="showcase-h2">
+          Interfaces that<br>
+          <em>disappear.</em>
+        </h2>
+        <p class="showcase-p">
+          Every re.arche product is designed to get out of the way.
+          Dense data, light footprint. The interface serves the work —
+          not the other way around.
+        </p>
+        <a href="#contact" class="link-quiet">Start a conversation →</a>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div class="dash" aria-hidden="true">
+        <div class="dash-header">
+          <span class="dash-title">Overview</span>
+          <span class="dash-badge">Live</span>
+        </div>
+
+        <div class="dash-metrics">
+          <div class="metric">
+            <div class="metric-label">Focus sessions</div>
+            <div class="metric-value">12,540</div>
+            <div class="metric-delta">↑ 12.5%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Avg depth</div>
+            <div class="metric-value">94 min</div>
+            <div class="metric-delta">↑ 8.3%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Distractions</div>
+            <div class="metric-value">0.4</div>
+            <div class="metric-delta metric-delta--neg">↓ 31%</div>
+          </div>
+        </div>
+
+        <div class="dash-chart-wrap">
+          <div class="dash-chart-label">Weekly output trend</div>
+          <svg class="dash-chart-svg" viewBox="0 0 340 64" fill="none" preserveAspectRatio="none">
+            <!-- Area fill -->
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(63,83,102,.35)"/>
+                <stop offset="100%" stop-color="rgba(63,83,102,.0)"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 52 C30 48, 60 42, 90 36 C120 30, 140 44, 170 28 C200 12, 220 20, 250 10 C280 0, 310 8, 340 4 L340 64 L0 64 Z"
+                  fill="url(#chartGrad)"/>
+            <!-- Line -->
+            <path d="M0 52 C30 48, 60 42, 90 36 C120 30, 140 44, 170 28 C200 12, 220 20, 250 10 C280 0, 310 8, 340 4"
+                  stroke="rgba(63,83,102,.80)" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Dots -->
+            <circle cx="90"  cy="36" r="2.5" fill="rgba(109,175,135,.55)"/>
+            <circle cx="170" cy="28" r="2.5" fill="rgba(109,175,135,.55)"/>
+            <circle cx="250" cy="10" r="3"   fill="rgba(109,175,135,.90)"/>
+            <circle cx="340" cy="4"  r="2.5" fill="rgba(109,175,135,.55)"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     PROCESS
+═══════════════════════════════════════════════ -->
+<section class="section">
+  <div class="wrap">
+
+    <p class="sec-label reveal">03 — How we work</p>
+
+    <div class="process-header reveal">
+      <h2 class="process-h2">From diagnosis<br>to launch.</h2>
+      <p class="process-sub">A disciplined four-step process built for clarity at every stage.</p>
+    </div>
+
+    <div class="process-steps reveal" role="list">
+
+      <div class="step" role="listitem">
+        <span class="step-num">01</span>
+        <div class="step-line"></div>
+        <h3 class="step-title">Diagnose</h3>
+        <p class="step-desc">We start by understanding the real problem — not the stated one. Deep audit of what exists, what's broken, and what the product is actually for.</p>
+      </div>
+
+      <div class="step" role="listitem">
+        <span class="step-num">02</span>
+        <div class="step-line"></div>
+        <h3 class="step-title">Rebuild</h3>
+        <p class="step-desc">Structure before aesthetics. We rebuild the logic, the architecture, and the information hierarchy from first principles. Nothing is carried over without earning its place.</p>
+      </div>
+
+      <div class="step" role="listitem">
+        <span class="step-num">03</span>
+        <div class="step-line"></div>
+        <h3 class="step-title">Refine</h3>
+        <p class="step-desc">Precision work. Typography, spacing, motion, and interaction are tuned until nothing feels out of place. The details are not decoration — they are the product.</p>
+      </div>
+
+      <div class="step" role="listitem">
+        <span class="step-num">04</span>
+        <div class="step-line"></div>
+        <h3 class="step-title">Launch</h3>
+        <p class="step-desc">Shipped with care. We define what done means before we start, and we hold that line until it's true — no half-finished releases, no corner-cut deployments.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     STUDIO — Manifesto
+═══════════════════════════════════════════════ -->
+<section class="section" id="studio" id="principles">
+  <div class="wrap">
+
+    <p class="sec-label reveal">04 — Philosophy</p>
+
+    <div class="manifesto-grid reveal">
 
       <div>
         <h2 class="manifesto-h2">
@@ -851,7 +1313,7 @@
           <p>Based in Norway. Shipping to the world.</p>
         </div>
 
-        <div class="principles">
+        <div class="principles" id="principles-list">
           <div class="principle"><div class="pdot"></div><span>Clarity over complexity</span></div>
           <div class="principle"><div class="pdot"></div><span>Systems over screens</span></div>
           <div class="principle"><div class="pdot"></div><span>Depth over noise</span></div>
@@ -867,19 +1329,42 @@
 
 
 <!-- ══════════════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="final-cta-h2">Build from<br>first principles.</h2>
+      <p class="final-cta-p">
+        Let's rebuild your product into something calmer,
+        sharper and more valuable. No templates. No shortcuts.
+      </p>
+      <a href="#contact" class="btn-primary">
+        Start a conversation
+        <svg width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true">
+          <path d="M1 4.5h12M8.5 1l4 3.5-4 3.5" stroke="currentColor"
+                stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
      CONTACT
 ═══════════════════════════════════════════════ -->
 <section class="section" id="contact">
   <div class="wrap">
 
-    <p class="sec-label">03 — Contact</p>
+    <p class="sec-label reveal">05 — Contact</p>
 
-    <div class="contact-inner">
+    <div class="contact-inner reveal">
       <h2 class="contact-h2">Say<br>hello.</h2>
 
       <div class="contact-aside">
-        <a href="mailto:hello@re.arche.com" class="contact-email">
-          hello@re.arche.com
+        <a href="mailto:hello@rearche.com" class="contact-email">
+          hello@rearche.com
         </a>
         <div class="contact-socials">
           <a href="#">X</a>
@@ -901,6 +1386,21 @@
   <span>re.arche · Intelligence. Rebuilt.</span>
   <span>© 2026 · Built from first principles</span>
 </footer>
+
+
+<script>
+  /* Scroll-reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
