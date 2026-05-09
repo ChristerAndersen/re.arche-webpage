@@ -29,15 +29,16 @@ a { text-decoration: none; color: inherit; }
   position: absolute;
   bottom: -5%;
   right: -5%;
-  width: min(700px, 55vw);
-  height: min(600px, 50vw);
+  width: min(800px, 65vw);
+  height: min(700px, 58vw);
   background: radial-gradient(
-    ellipse at 65% 80%,
-    rgba(40, 80, 160, .09) 0%,
-    rgba(25, 55, 130, .04) 45%,
-    transparent             72%
+    ellipse at 62% 75%,
+    rgba(55, 100, 200, .16) 0%,
+    rgba(40, 78, 165, .07) 35%,
+    rgba(28, 58, 140, .03) 58%,
+    transparent             80%
   );
-  filter: blur(60px);
+  filter: blur(70px);
   pointer-events: none;
 }
 
