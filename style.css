@@ -51,24 +51,57 @@ a { text-decoration: none; color: inherit; }
   opacity: .9;
 }
 
-/* Glow dots — pulse */
-.gd {
-  animation: dot-pulse 6s ease-in-out infinite;
+/* Signal points — slow breathing, cinematic */
+.gd-primary {
+  animation: breathe-a 10s ease-in-out infinite;
 }
-@keyframes dot-pulse {
-  0%,  100% { opacity: .20; }
-  50%        { opacity: 1;   }
+.gd-sec {
+  animation: breathe-b 14s ease-in-out infinite;
+}
+.gd-ter {
+  animation: breathe-b 20s ease-in-out infinite;
+}
+@keyframes breathe-a {
+  0%, 100% { opacity: .25; }
+  50%       { opacity: .78; }
+}
+@keyframes breathe-b {
+  0%, 100% { opacity: .14; }
+  50%       { opacity: .44; }
 }
 
-/* Orbiting tracer */
+/* Orbiting tracer — 90s, imperceptible pace */
 .orbit-tracer {
   transform-box: view-box;
   transform-origin: 50% 50%;
-  animation: orbit 80s linear infinite;
+  animation: orbit 90s linear infinite;
 }
 @keyframes orbit {
   from { transform: rotate(0deg);   }
   to   { transform: rotate(360deg); }
+}
+
+/* Aurora — deep environmental glow */
+.bg-aurora {
+  position: absolute;
+  bottom: -15%;
+  right: -10%;
+  width: 68%;
+  height: 58%;
+  background: radial-gradient(
+    ellipse at 62% 72%,
+    rgba(15, 40, 110, .07) 0%,
+    rgba(10, 28,  80, .03) 44%,
+    transparent            68%
+  );
+  filter: blur(55px);
+  pointer-events: none;
+  animation: aurora-breathe 22s ease-in-out infinite;
+}
+@keyframes aurora-breathe {
+  0%,  100% { opacity: .55; transform: translate(  0,    0);   }
+  38%        { opacity: .88; transform: translate(-2%,  1.5%); }
+  70%        { opacity: .60; transform: translate( 1.5%, -1%); }
 }
 
 /* ─── Page shell ─── */

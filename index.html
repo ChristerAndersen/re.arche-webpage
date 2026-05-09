@@ -11,95 +11,81 @@
 <!-- Background: origin diagram — ἀρχή -->
 <div class="bg" aria-hidden="true">
   <div class="bg-glow"></div>
+  <div class="bg-aurora"></div>
   <svg class="bg-arche" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <radialGradient id="og" cx="50%" cy="50%" r="50%">
-        <stop offset="0%"   stop-color="rgba(50,90,160,.13)"/>
-        <stop offset="55%"  stop-color="rgba(30,60,120,.04)"/>
+        <stop offset="0%"   stop-color="rgba(50,90,160,.09)"/>
+        <stop offset="55%"  stop-color="rgba(30,60,120,.03)"/>
         <stop offset="100%" stop-color="transparent"/>
       </radialGradient>
+      <!-- Depth blur for outer rings -->
+      <filter id="ring-blur" x="-2%" y="-2%" width="104%" height="104%">
+        <feGaussianBlur stdDeviation="0.7"/>
+      </filter>
     </defs>
 
     <!-- Ambient fill -->
     <circle cx="350" cy="350" r="340" fill="url(#og)"/>
 
-    <!-- Rings: outer → inner -->
-    <circle cx="350" cy="350" r="320" stroke="rgba(255,255,255,.038)" stroke-width="1"/>
-    <circle cx="350" cy="350" r="270" stroke="rgba(255,255,255,.046)" stroke-width=".8" stroke-dasharray="3 9"/>
-    <circle cx="350" cy="350" r="220" stroke="rgba(255,255,255,.054)" stroke-width="1"/>
-    <circle cx="350" cy="350" r="165" stroke="rgba(255,255,255,.062)" stroke-width=".8" stroke-dasharray="2 7"/>
-    <circle cx="350" cy="350" r="110" stroke="rgba(100,145,210,.11)"  stroke-width="1"/>
-    <circle cx="350" cy="350" r="60"  stroke="rgba(100,145,210,.16)"  stroke-width="1"/>
-    <circle cx="350" cy="350" r="22"  stroke="rgba(100,155,225,.20)"  stroke-width="1.2"/>
-
-    <!-- Cross axes -->
-    <line x1="350" y1="10"  x2="350" y2="690" stroke="rgba(255,255,255,.022)" stroke-width="1"/>
-    <line x1="10"  y1="350" x2="690" y2="350" stroke="rgba(255,255,255,.022)" stroke-width="1"/>
-
-    <!-- Diagonals -->
-    <line x1="124" y1="124" x2="576" y2="576" stroke="rgba(255,255,255,.014)" stroke-width="1"/>
-    <line x1="576" y1="124" x2="124" y2="576" stroke="rgba(255,255,255,.014)" stroke-width="1"/>
-
-    <!-- Cardinal ticks -->
-    <line x1="350" y1="10"  x2="350" y2="32"  stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-    <line x1="350" y1="668" x2="350" y2="690" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-    <line x1="10"  y1="350" x2="32"  y2="350" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-    <line x1="668" y1="350" x2="690" y2="350" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-
-    <!-- Glow dots — ring r320, top -->
-    <g class="gd" style="animation-delay:0s">
-      <circle cx="350" cy="30"  r="7"   fill="rgba(80,140,255,.08)"/>
-      <circle cx="350" cy="30"  r="2.5" fill="rgba(150,200,255,.78)"/>
-    </g>
-    <!-- r320, top-right 45° -->
-    <g class="gd" style="animation-delay:-1.8s">
-      <circle cx="576" cy="124" r="6"   fill="rgba(80,140,255,.07)"/>
-      <circle cx="576" cy="124" r="2"   fill="rgba(150,200,255,.65)"/>
-    </g>
-    <!-- r320, right -->
-    <g class="gd" style="animation-delay:-3.5s">
-      <circle cx="670" cy="350" r="6"   fill="rgba(80,140,255,.07)"/>
-      <circle cx="670" cy="350" r="2"   fill="rgba(150,200,255,.60)"/>
-    </g>
-    <!-- r270, top -->
-    <g class="gd" style="animation-delay:-5.2s">
-      <circle cx="350" cy="80"  r="5.5" fill="rgba(80,140,255,.07)"/>
-      <circle cx="350" cy="80"  r="2"   fill="rgba(150,200,255,.58)"/>
-    </g>
-    <!-- r220, right -->
-    <g class="gd" style="animation-delay:-7.0s">
-      <circle cx="570" cy="350" r="5.5" fill="rgba(80,140,255,.07)"/>
-      <circle cx="570" cy="350" r="2"   fill="rgba(150,200,255,.62)"/>
-    </g>
-    <!-- r220, top-left -->
-    <g class="gd" style="animation-delay:-2.4s">
-      <circle cx="194" cy="194" r="5"   fill="rgba(80,140,255,.06)"/>
-      <circle cx="194" cy="194" r="1.8" fill="rgba(150,200,255,.55)"/>
-    </g>
-    <!-- r165, top -->
-    <g class="gd" style="animation-delay:-4.6s">
-      <circle cx="350" cy="185" r="5"   fill="rgba(80,140,255,.07)"/>
-      <circle cx="350" cy="185" r="1.8" fill="rgba(150,200,255,.55)"/>
-    </g>
-    <!-- r110, right -->
-    <g class="gd" style="animation-delay:-6.4s">
-      <circle cx="460" cy="350" r="4.5" fill="rgba(80,140,255,.07)"/>
-      <circle cx="460" cy="350" r="1.8" fill="rgba(150,200,255,.55)"/>
-    </g>
-    <!-- r60, top -->
-    <g class="gd" style="animation-delay:-8.1s">
-      <circle cx="350" cy="290" r="4"   fill="rgba(80,140,255,.07)"/>
-      <circle cx="350" cy="290" r="1.8" fill="rgba(150,200,255,.55)"/>
+    <!-- Outer rings — blurred, very quiet -->
+    <g filter="url(#ring-blur)">
+      <circle cx="350" cy="350" r="320" stroke="rgba(255,255,255,.024)" stroke-width=".7"/>
+      <circle cx="350" cy="350" r="271" stroke="rgba(255,255,255,.028)" stroke-width=".5" stroke-dasharray="2 11"/>
     </g>
 
-    <!-- Origin point -->
-    <circle cx="350" cy="350" r="3"   fill="rgba(110,160,230,.55)"/>
-    <circle cx="350" cy="350" r="6.5" stroke="rgba(100,155,225,.22)" stroke-width="1" fill="none"/>
+    <!-- Mid rings — sharp -->
+    <circle cx="350" cy="350" r="220" stroke="rgba(255,255,255,.034)" stroke-width=".7"/>
+    <circle cx="350" cy="350" r="166" stroke="rgba(255,255,255,.040)" stroke-width=".5" stroke-dasharray="1.5 8"/>
 
-    <!-- Orbiting tracer on ring r=220 -->
+    <!-- Inner rings — slightly colored -->
+    <circle cx="350" cy="350" r="110" stroke="rgba(100,145,210,.075)" stroke-width=".8"/>
+    <circle cx="350" cy="350" r="60"  stroke="rgba(100,145,210,.10)"  stroke-width=".8"/>
+    <circle cx="350" cy="350" r="22"  stroke="rgba(100,155,225,.14)"  stroke-width=".9"/>
+
+    <!-- Cross axes only — no diagonals -->
+    <line x1="350" y1="10"  x2="350" y2="690" stroke="rgba(255,255,255,.013)" stroke-width=".7"/>
+    <line x1="10"  y1="350" x2="690" y2="350" stroke="rgba(255,255,255,.013)" stroke-width=".7"/>
+
+    <!-- Cardinal ticks — softer -->
+    <line x1="350" y1="10"  x2="350" y2="26"  stroke="rgba(255,255,255,.09)" stroke-width=".9"/>
+    <line x1="350" y1="674" x2="350" y2="690" stroke="rgba(255,255,255,.09)" stroke-width=".9"/>
+    <line x1="10"  y1="350" x2="26"  y2="350" stroke="rgba(255,255,255,.09)" stroke-width=".9"/>
+    <line x1="674" y1="350" x2="690" y2="350" stroke="rgba(255,255,255,.09)" stroke-width=".9"/>
+
+    <!-- Primary signal — r110, slight asymmetry -->
+    <g class="gd-primary">
+      <circle cx="461" cy="349" r="9"   fill="rgba(80,140,255,.05)"/>
+      <circle cx="461" cy="349" r="2.4" fill="rgba(150,200,255,.68)"/>
+    </g>
+
+    <!-- Secondary signal A — r270, near-top, off-axis -->
+    <g class="gd-sec" style="animation-delay:-4s">
+      <circle cx="353" cy="81"  r="5"   fill="rgba(80,140,255,.04)"/>
+      <circle cx="353" cy="81"  r="1.7" fill="rgba(150,200,255,.46)"/>
+    </g>
+
+    <!-- Secondary signal B — r220, upper-left quadrant -->
+    <g class="gd-sec" style="animation-delay:-9s">
+      <circle cx="196" cy="197" r="4.5" fill="rgba(80,140,255,.03)"/>
+      <circle cx="196" cy="197" r="1.5" fill="rgba(150,200,255,.40)"/>
+    </g>
+
+    <!-- Tertiary — r320 right, barely perceptible -->
+    <g class="gd-ter" style="animation-delay:-14s">
+      <circle cx="670" cy="353" r="4"   fill="rgba(80,140,255,.025)"/>
+      <circle cx="670" cy="353" r="1.4" fill="rgba(150,200,255,.28)"/>
+    </g>
+
+    <!-- Origin — center, softly enhanced -->
+    <circle cx="350" cy="350" r="14"  stroke="rgba(100,155,225,.045)" stroke-width=".5" fill="none"/>
+    <circle cx="350" cy="350" r="7"   stroke="rgba(100,155,225,.13)"  stroke-width=".8" fill="none"/>
+    <circle cx="350" cy="350" r="3"   fill="rgba(110,160,230,.50)"/>
+
+    <!-- Orbital tracer — r220, very subtle -->
     <g class="orbit-tracer">
-      <circle cx="570" cy="350" r="2.8" fill="rgba(130,190,255,.80)"/>
-      <circle cx="570" cy="350" r="7"   fill="rgba(80,140,255,.09)"/>
+      <circle cx="570" cy="350" r="1.8" fill="rgba(130,190,255,.52)"/>
+      <circle cx="570" cy="350" r="5"   fill="rgba(80,140,255,.055)"/>
     </g>
   </svg>
 </div>
