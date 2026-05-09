@@ -238,6 +238,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ─── Dashboard Card ─── */
 .card {
+  margin-top: 30px;
   background: rgba(13, 18, 36, .75);
   border: 1px solid rgba(255, 255, 255, .08);
   border-radius: 16px;
