@@ -44,11 +44,31 @@ a { text-decoration: none; color: inherit; }
 /* Origin diagram — ἀρχή */
 .bg-arche {
   position: absolute;
-  bottom: -32%;
-  right: -10%;
-  width: min(680px, 52vw);
-  height: min(680px, 52vw);
+  bottom: -50%;
+  right: -25%;
+  width: 120vmin;
+  height: 120vmin;
   opacity: .9;
+}
+
+/* Glow dots — pulse */
+.gd {
+  animation: dot-pulse 6s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%,  100% { opacity: .20; }
+  50%        { opacity: 1;   }
+}
+
+/* Orbiting tracer */
+.orbit-tracer {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: orbit 80s linear infinite;
+}
+@keyframes orbit {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
 }
 
 /* ─── Page shell ─── */
