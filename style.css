@@ -116,7 +116,7 @@ a { text-decoration: none; color: inherit; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 128px;
+  padding-top: 64px;
   padding-bottom: 44px;
   min-height: 0;
 }
@@ -157,7 +157,7 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: 1fr 272px;
   gap: 60px;
   align-items: start;
-  margin-top: 48px;
+  margin-top: 112px;
 }
 
 /* ─── Selected Projects ─── */
