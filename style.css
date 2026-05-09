@@ -207,8 +207,11 @@ a { text-decoration: none; color: inherit; }
 
 /* ─── About view content ─── */
 .about-body {
-  margin-top: 56px;
-  max-width: 500px;
+  margin-top: 52px;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .about-philosophy {
@@ -226,54 +229,54 @@ a { text-decoration: none; color: inherit; }
 .about-line--gap { margin-top: 14px; }
 
 .about-sep {
-  width: 100%;
+  width: 48px;
   height: 1px;
-  background: rgba(255, 255, 255, .07);
-  margin: 36px 0;
+  background: rgba(255, 255, 255, .10);
+  margin: 28px 0;
 }
 
 .about-focus-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
-  letter-spacing: .13em;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .26);
-  margin-bottom: 18px;
+  color: rgba(255, 255, 255, .22);
+  margin-bottom: 12px;
 }
 
 .about-focus-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 .about-focus-item {
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 300;
-  letter-spacing: -.015em;
-  color: rgba(255, 255, 255, .52);
+  letter-spacing: .01em;
+  color: rgba(255, 255, 255, .38);
 }
 
 .about-studio {
-  margin-top: 36px;
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 .about-studio-line {
   font-size: 13px;
   font-weight: 400;
   letter-spacing: .04em;
-  color: rgba(255, 255, 255, .28);
+  color: rgba(255, 255, 255, .24);
 }
 
 .about-closing {
-  margin-top: 28px;
-  font-size: 11px;
+  margin-top: 24px;
+  font-size: 10px;
   font-weight: 400;
-  letter-spacing: .13em;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .18);
+  color: rgba(255, 255, 255, .15);
 }
 
 /* ─── Hero ─── */
