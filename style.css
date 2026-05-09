@@ -208,7 +208,7 @@ a { text-decoration: none; color: inherit; }
 /* ─── About view content ─── */
 .about-body {
   margin-top: 52px;
-  max-width: 420px;
+  max-width: 680px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -216,7 +216,7 @@ a { text-decoration: none; color: inherit; }
 
 .about-philosophy {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: baseline;
   gap: 8px 10px;
 }
