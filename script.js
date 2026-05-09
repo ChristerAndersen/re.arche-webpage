@@ -203,6 +203,7 @@
   const viewEls = {
     home:    document.getElementById('view-home'),
     connect: document.getElementById('view-connect'),
+    about:   document.getElementById('view-about'),
   };
 
   let current = 'home';
