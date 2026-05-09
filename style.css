@@ -198,8 +198,12 @@ a { text-decoration: none; color: inherit; }
   padding-top: 22px;
   border-top: 1px solid rgba(255, 255, 255, .07);
   transition: color 240ms ease;
+  animation: cta-breathe 3.6s ease-in-out infinite;
 }
-.connect-cta:hover { color: rgba(255, 255, 255, .70); }
+.connect-cta:hover {
+  color: rgba(255, 255, 255, .90);
+  animation: none;
+}
 .connect-cta-dot {
   width: 7px;
   height: 7px;
@@ -207,6 +211,25 @@ a { text-decoration: none; color: inherit; }
   background: #3b82f6;
   flex-shrink: 0;
   box-shadow: 0 0 8px rgba(59, 130, 246, .55);
+  animation: cta-dot-pulse 3.6s ease-in-out infinite;
+}
+.connect-cta:hover .connect-cta-dot {
+  animation: none;
+  box-shadow: 0 0 14px rgba(59, 130, 246, .90);
+}
+@keyframes cta-breathe {
+  0%, 100% { color: rgba(255,255,255,.32); }
+  50%       { color: rgba(255,255,255,.72); text-shadow: 0 0 18px rgba(255,255,255,.10); }
+}
+@keyframes cta-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(59,130,246,.45);
+  }
+  50% {
+    transform: scale(1.35);
+    box-shadow: 0 0 14px rgba(59,130,246,.85), 0 0 28px rgba(59,130,246,.30);
+  }
 }
 .cta-arrow {
   display: inline-block;
