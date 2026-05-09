@@ -487,10 +487,20 @@ a { text-decoration: none; color: inherit; }
   50%        { box-shadow: 0 0 9px rgba(109, 175, 135, .75); opacity: 1;   }
 }
 
-.copyright {
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, .24);
+.signature {
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: rgba(255, 255, 255, .22);
+  opacity: 0;
+  animation: sig-fadein 1.8s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+  transition: color 400ms ease;
+}
+.signature:hover {
+  color: rgba(255, 255, 255, .42);
+}
+@keyframes sig-fadein {
+  to { opacity: 1; }
 }
 
 /* ─── Reduced motion ─── */
@@ -502,6 +512,7 @@ a { text-decoration: none; color: inherit; }
   .card--pulse { filter: none !important; }
   .location-pill { transform: none !important; }
   .pill-text { transition: opacity 80ms linear !important; filter: none !important; }
+  .signature { animation: none !important; opacity: 1 !important; }
 }
 
 /* ─── Responsive ─── */
