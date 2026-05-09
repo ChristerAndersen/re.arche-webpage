@@ -189,19 +189,28 @@ a { text-decoration: none; color: inherit; }
 .connect-cta {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 16px;
+  gap: 9px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: -.008em;
-  color: rgba(255, 255, 255, .68);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .38);
   padding-top: 22px;
   border-top: 1px solid rgba(255, 255, 255, .07);
   transition: color 240ms ease;
 }
-.connect-cta:hover { color: rgba(255, 255, 255, .95); }
+.connect-cta:hover { color: rgba(255, 255, 255, .70); }
+.connect-cta-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3b82f6;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(59, 130, 246, .55);
+}
 .cta-arrow {
   display: inline-block;
-  font-size: 13px;
+  font-size: 11px;
   transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .connect-cta:hover .cta-arrow { transform: translate(2px, -2px); }
