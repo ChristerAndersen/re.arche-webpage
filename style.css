@@ -195,7 +195,12 @@ a { text-decoration: none; color: inherit; }
   column-gap: 18px;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, .04);
+  transition:
+    opacity  240ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
 }
+.project:focus-visible { outline: none; }
 
 /* Dot column — hidden by default, shown when active */
 .project-dot {
@@ -235,6 +240,39 @@ a { text-decoration: none; color: inherit; }
 .project--active .project-year { color: rgba(255, 255, 255, .65); }
 .project--active .project-name { color: rgba(255, 255, 255, .92); font-weight: 500; }
 .project--active .project-type { color: rgba(255, 255, 255, .52); }
+
+/* ─── Project hover interaction — light follows attention ─── */
+/* Dim all rows when any is hovered/focused */
+.projects-list:has(.project:hover)       .project,
+.projects-list:has(.project:focus-visible) .project { opacity: 0.38; }
+
+/* Un-dim the attended row */
+.projects-list:has(.project:hover)         .project:hover,
+.projects-list:has(.project:focus-visible) .project:focus-visible {
+  opacity: 1;
+  transform: translateX(2px);
+}
+.projects-list:has(.project:hover)         .project:hover .project-name,
+.projects-list:has(.project:focus-visible) .project:focus-visible .project-name {
+  text-shadow: 0 0 20px rgba(255, 255, 255, .10);
+}
+
+/* Active row stays slightly brighter when another row is attended */
+.projects-list:has(.project:hover)         .project--active:not(:hover),
+.projects-list:has(.project:focus-visible) .project--active:not(:focus-visible) {
+  opacity: 0.58;
+}
+
+/* ─── Dashboard Card atmosphere ─── */
+.card {
+  transition:
+    opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter  280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card--pulse {
+  opacity: 0.88;
+  filter: blur(0.6px);
+}
 
 /* ─── Dashboard Card ─── */
 .card {
@@ -402,6 +440,9 @@ a { text-decoration: none; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   .marquee-track { animation-play-state: paused; }
+  .project:hover,
+  .project:focus-visible { transform: none !important; }
+  .card--pulse { filter: none !important; }
 }
 
 /* ─── Responsive ─── */
