@@ -276,6 +276,33 @@ a { text-decoration: none; color: inherit; }
   filter: blur(1.8px);
 }
 
+/* ─── App preview phones ─── */
+.phones {
+  position: relative;
+  height: 196px;
+  margin-top: 14px;
+}
+.phone {
+  position: absolute;
+  width: 108px;
+  height: 186px;
+  border-radius: 18px;
+  background: #07091a;
+  border: 1.5px solid rgba(255, 255, 255, .09);
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .55);
+}
+.phone--back {
+  left: 8px;
+  top: 10px;
+  transform: rotate(-5deg);
+  opacity: 0.42;
+}
+.phone--front {
+  right: 8px;
+  top: 0;
+}
+
 /* ─── Dashboard Card ─── */
 .card {
   margin-top: 30px;

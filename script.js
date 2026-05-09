@@ -1,52 +1,135 @@
 // re.arche
 
-// Dashboard card — data per project
 (function () {
+
+  // —— minimal screen builder ——
+  function screen(accent, body) {
+    return `<div style="height:100%;display:flex;flex-direction:column;background:#07091a">
+      <div style="height:20px;background:${accent};flex-shrink:0;opacity:.78"></div>
+      <div style="flex:1;padding:9px 8px;display:flex;flex-direction:column;gap:6px;overflow:hidden">${body}</div>
+    </div>`;
+  }
+
+  const row = (w, h, bg, r = 3) =>
+    `<div style="width:${w};height:${h}px;background:${bg};border-radius:${r}px;flex-shrink:0"></div>`;
+
+  const grid = (cols, items, h, r = 5, gap = 4) =>
+    `<div style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}px;flex-shrink:0">
+      ${items.map(bg => `<div style="height:${h}px;background:${bg};border-radius:${r}px"></div>`).join('')}
+    </div>`;
+
+  const bars = (hs, color) =>
+    `<div style="display:flex;align-items:flex-end;gap:3px;height:50px;flex-shrink:0">
+      ${hs.map(h => `<div style="flex:1;height:${h}px;background:${color};border-radius:2px 2px 0 0;opacity:${.35 + h / 90}"></div>`).join('')}
+    </div>`;
+
+  const ring = (size, color, sw = 2.5) =>
+    `<div style="width:${size}px;height:${size}px;border-radius:50%;border:${sw}px solid ${color};align-self:center;flex-shrink:0"></div>`;
+
+  const postRow = (avatarBg) =>
+    `<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+      <div style="width:20px;height:20px;border-radius:50%;background:${avatarBg};flex-shrink:0"></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:3px">
+        ${row('65%', 4, 'rgba(255,255,255,.13)')}
+        ${row('42%', 3, 'rgba(255,255,255,.06)')}
+      </div>
+    </div>`;
+
+  // —— per-project data ——
   const data = [
-    {
-      rev: '$28.6M', revD: '▲ 12.5%',
-      users: '24,531', usersD: '▲ 8.1%',
-      path: 'M0 44 C22 42 38 36 58 30 C78 24 92 36 112 26 C132 16 148 24 168 14 C188 4 202 10 222 6 C242 2 260 4 280 2'
+    { // Brunsohn — design portfolio
+      name: 'Brunsohn',
+      front: screen('#1e4fa8',
+        grid(2, ['rgba(36,72,160,.65)', 'rgba(20,45,120,.80)', 'rgba(48,90,190,.50)', 'rgba(28,55,140,.75)'], 46) +
+        row('66%', 6, 'rgba(255,255,255,.10)') +
+        row('42%', 6, 'rgba(255,255,255,.06)')
+      ),
+      back: screen('#152e7a',
+        row('100%', 70, 'rgba(24,50,120,.70)', 6) +
+        row('60%', 6, 'rgba(255,255,255,.10)') +
+        row('38%', 6, 'rgba(255,255,255,.06)') +
+        row('50%', 6, 'rgba(255,255,255,.05)')
+      )
     },
-    {
-      rev: '$4.2M',  revD: '▲ 31.2%',
-      users: '8,847', usersD: '▲ 22.4%',
-      path: 'M0 49 C18 47 36 46 56 42 C76 38 92 40 112 32 C132 24 148 28 168 18 C188 8 204 11 224 6 C244 2 262 3 280 2'
+    { // Inertia Labs — engineering dashboard
+      name: 'Inertia Labs',
+      front: screen('#3d1fa0',
+        row('100%', 38, 'rgba(55,28,150,.55)', 5) +
+        bars([18, 28, 22, 38, 30, 44, 36, 48], 'rgba(110,75,230,.80)') +
+        row('68%', 6, 'rgba(255,255,255,.10)')
+      ),
+      back: screen('#2a1480',
+        bars([24, 36, 30, 48, 38, 54, 44, 58], 'rgba(130,95,245,.70)') +
+        row('75%', 6, 'rgba(255,255,255,.10)') +
+        row('52%', 6, 'rgba(255,255,255,.06)') +
+        row('62%', 6, 'rgba(255,255,255,.05)')
+      )
     },
-    {
-      rev: '$1.8M',  revD: '▲ 58.3%',
-      users: '3,210', usersD: '▲ 41.7%',
-      path: 'M0 51 C16 50 32 49 52 46 C72 43 90 44 110 37 C130 29 146 32 166 21 C186 10 202 13 222 7 C242 3 261 1 280 0'
+    { // Immersion — focus / clarity
+      name: 'Immersion',
+      front: screen('#0b4a3c',
+        `<div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px">
+          ${ring(62, 'rgba(45,185,135,.55)')}
+          ${ring(44, 'rgba(45,200,145,.35)', 1.5)}
+          <div style="width:7px;height:7px;border-radius:50%;background:rgba(45,200,140,.70);margin-top:2px"></div>
+        </div>` +
+        row('48%', 5, 'rgba(45,200,135,.14)', 2)
+      ),
+      back: screen('#083530',
+        row('100%', 54, 'rgba(18,88,70,.65)', 6) +
+        row('58%', 5, 'rgba(255,255,255,.08)') +
+        row('38%', 5, 'rgba(255,255,255,.05)') +
+        row('68%', 5, 'rgba(255,255,255,.05)')
+      )
     },
-    {
-      rev: '$12.1M', revD: '▲ 7.8%',
-      users: '15,620', usersD: '▲ 5.2%',
-      path: 'M0 40 C22 38 38 36 58 32 C78 28 92 32 112 24 C132 18 148 22 168 16 C188 10 202 12 222 8 C242 5 260 6 280 4'
+    { // SFN — social feed
+      name: 'SFN',
+      front: screen('#7a2c10',
+        postRow('rgba(200,88,38,.55)') +
+        row('100%', 42, 'rgba(140,55,18,.52)', 5) +
+        postRow('rgba(175,68,28,.45)') +
+        row('55%', 4, 'rgba(255,255,255,.07)')
+      ),
+      back: screen('#5a1e08',
+        grid(2,
+          ['rgba(140,58,18,.65)', 'rgba(100,38,10,.75)', 'rgba(165,68,24,.52)', 'rgba(120,48,14,.60)'],
+          52, 4
+        ) +
+        row('70%', 5, 'rgba(255,255,255,.09)') +
+        row('48%', 5, 'rgba(255,255,255,.06)')
+      )
     },
-    {
-      rev: '$890K',  revD: '▲ 94.1%',
-      users: '1,204', usersD: '▲ 76.8%',
-      path: 'M0 52 C14 51 28 50 48 48 C68 46 86 47 106 41 C126 33 142 37 162 25 C182 13 198 15 218 8 C238 3 260 1 280 0'
+    { // Sustina — sustainability
+      name: 'Sustina',
+      front: screen('#0b5228',
+        bars([18, 28, 24, 42, 34, 52, 44, 58], 'rgba(48,195,96,.78)') +
+        row('100%', 1, 'rgba(255,255,255,.05)') +
+        row('70%', 6, 'rgba(255,255,255,.10)') +
+        row('48%', 6, 'rgba(255,255,255,.06)')
+      ),
+      back: screen('#084020',
+        `<div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+          ${ring(56, 'rgba(48,195,88,.52)')}
+          ${row('52px', 5, 'rgba(48,195,88,.22)', 2)}
+        </div>` +
+        row('62%', 5, 'rgba(255,255,255,.08)')
+      )
     }
   ];
 
-  const items    = document.querySelectorAll('.project');
-  const card     = document.querySelector('.card');
+  // —— DOM ——
+  const items      = document.querySelectorAll('.project');
+  const card       = document.querySelector('.card');
   if (!card || !items.length) return;
 
-  const revVal    = card.querySelector('.stat:nth-child(1) .stat-val');
-  const revDelta  = card.querySelector('.stat:nth-child(1) .stat-delta');
-  const usersVal  = card.querySelector('.stat:nth-child(2) .stat-val');
-  const usersDelta = card.querySelector('.stat:nth-child(2) .stat-delta');
-  const paths     = card.querySelectorAll('.card-chart path');
+  const cardTitle  = card.querySelector('.card-title');
+  const phoneBack  = card.querySelector('.phone--back');
+  const phoneFront = card.querySelector('.phone--front');
 
   function applyData(d) {
-    revVal.textContent     = d.rev;
-    revDelta.textContent   = d.revD;
-    usersVal.textContent   = d.users;
-    usersDelta.textContent = d.usersD;
-    if (paths[0]) paths[0].setAttribute('d', d.path + ' L280 52 L0 52 Z');
-    if (paths[1]) paths[1].setAttribute('d', d.path);
+    if (cardTitle)  cardTitle.textContent = d.name;
+    if (phoneBack)  phoneBack.innerHTML   = d.back;
+    if (phoneFront) phoneFront.innerHTML  = d.front;
   }
 
   function swapCard(d) {
@@ -57,23 +140,16 @@
     }, 160);
   }
 
+  applyData(data[0]);
+
   let resetTimer;
   const defaultData = data[0];
 
   items.forEach((item, i) => {
-    item.addEventListener('mouseenter', () => {
-      clearTimeout(resetTimer);
-      swapCard(data[i]);
-    });
-    item.addEventListener('focus', () => {
-      clearTimeout(resetTimer);
-      swapCard(data[i]);
-    });
-    item.addEventListener('mouseleave', () => {
-      resetTimer = setTimeout(() => swapCard(defaultData), 500);
-    });
-    item.addEventListener('blur', () => {
-      resetTimer = setTimeout(() => swapCard(defaultData), 500);
-    });
+    item.addEventListener('mouseenter', () => { clearTimeout(resetTimer); swapCard(data[i]); });
+    item.addEventListener('focus',      () => { clearTimeout(resetTimer); swapCard(data[i]); });
+    item.addEventListener('mouseleave', () => { resetTimer = setTimeout(() => swapCard(defaultData), 500); });
+    item.addEventListener('blur',       () => { resetTimer = setTimeout(() => swapCard(defaultData), 500); });
   });
+
 }());
