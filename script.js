@@ -252,3 +252,90 @@
   // No nav item active on home view
   setNavActive(null);
 }());
+
+// —— Inactivity return system ——
+(function () {
+  const IDLE_MS     = 2 * 60 * 1000;   // 2 minutes
+  const COOLDOWN_MS = 15 * 60 * 1000;  // 15 minutes between triggers
+  const FADE_MS     = 320;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const originMsg      = document.getElementById('origin-msg');
+  const primarySignal  = document.querySelector('.gd-primary');
+  const homeView       = document.getElementById('view-home');
+
+  let idleTimer     = null;
+  let lastTriggered = -Infinity;
+  let running       = false;
+
+  function isHome() {
+    return homeView && !homeView.classList.contains('view--hidden');
+  }
+
+  function clearNavActive() {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('nav-link--active'));
+  }
+
+  function showHome() {
+    // Hide any currently visible non-home view
+    document.querySelectorAll('.view:not(.view--hidden)').forEach(v => {
+      v.classList.add('view--hidden');
+    });
+    clearNavActive();
+    homeView.style.opacity = '0';
+    homeView.classList.remove('view--hidden');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      homeView.style.opacity = '';
+    }));
+  }
+
+  function triggerReturn() {
+    if (isHome() || running) return;
+    if (Date.now() - lastTriggered < COOLDOWN_MS) return;
+
+    running = true;
+    lastTriggered = Date.now();
+
+    // Phase 1 (0ms): message fades in + signal intensifies
+    if (!prefersReduced.matches) {
+      primarySignal?.classList.add('gd-primary--alert');
+    }
+    if (originMsg) {
+      originMsg.setAttribute('aria-hidden', 'false');
+      originMsg.classList.add('origin-msg--visible');
+    }
+
+    // Phase 2 (800ms): current view fades out
+    setTimeout(() => {
+      const visible = document.querySelector('.view:not(.view--hidden)');
+      if (visible) visible.classList.add('view--fading');
+
+      // Phase 3 (800+FADE ms): swap to home
+      setTimeout(() => {
+        showHome();
+
+        // Phase 4 (500ms after home in): clean up
+        setTimeout(() => {
+          if (originMsg) {
+            originMsg.classList.remove('origin-msg--visible');
+            originMsg.setAttribute('aria-hidden', 'true');
+          }
+          primarySignal?.classList.remove('gd-primary--alert');
+          running = false;
+        }, 700);
+
+      }, FADE_MS);
+    }, 800);
+  }
+
+  function resetTimer() {
+    if (running) return;
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(triggerReturn, IDLE_MS);
+  }
+
+  const events = ['mousemove', 'scroll', 'click', 'keydown', 'touchstart', 'pointerdown'];
+  events.forEach(e => document.addEventListener(e, resetTimer, { passive: true }));
+
+  resetTimer();
+}());
