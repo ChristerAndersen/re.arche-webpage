@@ -216,8 +216,9 @@ a { text-decoration: none; color: inherit; }
 
 .about-philosophy {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 10px;
 }
 .about-line {
   font-size: 18px;
@@ -225,8 +226,13 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: -.012em;
   color: rgba(255, 255, 255, .48);
   line-height: 1.55;
+  white-space: nowrap;
 }
-.about-line--gap { margin-top: 14px; }
+.about-sep-dot {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .15);
+  line-height: 1.55;
+}
 
 .about-sep {
   width: 48px;
