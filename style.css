@@ -90,6 +90,7 @@ a { text-decoration: none; color: inherit; }
   justify-content: space-between;
   padding-bottom: 64px;
   flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
 }
 
 .logo {
