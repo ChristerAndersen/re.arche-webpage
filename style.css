@@ -176,7 +176,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ─── Connect view content ─── */
 .connect-body {
-  margin-top: 80px;
+  margin-top: 0;
   max-width: 460px;
 }
 .connect-text {
@@ -184,7 +184,7 @@ a { text-decoration: none; color: inherit; }
   font-weight: 400;
   line-height: 1.70;
   color: rgba(255, 255, 255, .46);
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
 .connect-cta {
   display: inline-flex;
