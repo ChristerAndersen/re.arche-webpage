@@ -320,6 +320,21 @@ a { text-decoration: none; color: inherit; }
   color: rgba(255, 255, 255, .22);
   white-space: nowrap;
   padding: 0 24px;
+  animation: word-shimmer 48s ease-in-out infinite;
+}
+
+/* Stagger the shimmer so different phrases light up at different moments */
+.mitem:nth-child(1),  .mitem:nth-child(6)  { animation-delay:   0s; }
+.mitem:nth-child(2),  .mitem:nth-child(7)  { animation-delay: -10s; }
+.mitem:nth-child(3),  .mitem:nth-child(8)  { animation-delay: -21s; }
+.mitem:nth-child(4),  .mitem:nth-child(9)  { animation-delay: -33s; }
+.mitem:nth-child(5),  .mitem:nth-child(10) { animation-delay: -43s; }
+
+@keyframes word-shimmer {
+  0%    { color: rgba(255,255,255,.22); text-shadow: none; }
+  1.5%  { color: rgba(255,255,255,.58); text-shadow: 0 0 14px rgba(255,255,255,.18); }
+  3.5%  { color: rgba(255,255,255,.22); text-shadow: none; }
+  100%  { color: rgba(255,255,255,.22); text-shadow: none; }
 }
 .msep {
   font-size: 11px;
