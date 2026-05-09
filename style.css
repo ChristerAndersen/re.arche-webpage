@@ -289,7 +289,7 @@ a { text-decoration: none; }
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: .12em;
-  color: rgba(255,255,255,.36);
+  color: rgba(255,255,255,.58);
   position: relative;
   transition: color .25s;
 }
@@ -1004,12 +1004,12 @@ footer span {
   50%       { transform: translateX(1.5%); opacity: 1;  }
 }
 
-.reveal {
+.js-ready .reveal {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity .75s ease, transform .75s ease;
 }
-.reveal.visible {
+.js-ready .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
