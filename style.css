@@ -262,7 +262,7 @@ a { text-decoration: none; color: inherit; }
 
 .about-focus-item {
   display: grid;
-  grid-template-columns: 18px 52px 1fr;
+  grid-template-columns: 18px 52px 1fr auto;
   align-items: center;
   column-gap: 18px;
   padding: 8px 0;
@@ -275,13 +275,24 @@ a { text-decoration: none; color: inherit; }
   justify-self: center;
   visibility: hidden;
 }
-.about-focus-gap { display: block; }
+.about-focus-year {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .28);
+  font-variant-numeric: tabular-nums;
+}
 .about-focus-name {
   font-size: 27px;
   font-weight: 400;
   letter-spacing: -.016em;
   line-height: 1.08;
   color: rgba(255, 255, 255, .30);
+}
+.about-focus-type {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .24);
+  white-space: nowrap;
 }
 
 .about-studio {
