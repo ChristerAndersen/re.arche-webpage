@@ -185,7 +185,7 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 0 8px rgba(59, 130, 246, .55);
 }
 
-.projects { padding-right: 80px; }
+.projects { padding-right: 260px; }
 .projects-list { list-style: none; }
 
 .project {
