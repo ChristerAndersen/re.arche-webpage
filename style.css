@@ -821,7 +821,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ─── Responsive ─── */
 @media (max-width: 960px) {
-  body { overflow: auto; }
+  body { overflow-x: hidden; overflow-y: auto; }
   .page { height: auto; min-height: 100svh; }
   .hero {
     padding-top: 32px;
