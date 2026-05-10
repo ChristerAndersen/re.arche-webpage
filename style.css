@@ -838,14 +838,24 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 640px) {
-  .page { padding: 28px 6% 0; }
-  .header { padding-bottom: 44px; }
+  .page { padding: 24px 6% 0; }
+
+  /* Header — tighter gap so content starts higher on small screens */
+  .header { padding-bottom: 14px; margin-bottom: 20px; }
   .logo { font-size: 26px; }
   .nav { gap: 22px; }
   .nav-link { font-size: 14px; }
-  .headline { font-size: clamp(48px, 12vw, 68px); }
-  .brand-strip { font-size: 10.5px; gap: 10px; }
-  .card { max-width: 100%; }
+
+  /* Hero — less top padding, content starts earlier */
+  .hero { padding-top: 20px; }
+
+  .headline { font-size: clamp(44px, 11vw, 64px); margin-top: 10px; }
+
+  /* Home — tighter gap from headline to project list */
+  .content-grid { margin-top: 36px; }
+
+  /* Card hidden on mobile — hover interaction doesn't work on touch */
+  .card { display: none; }
 
   /* Home — project list */
   .project { grid-template-columns: 44px 1fr; }
@@ -853,12 +863,14 @@ a { text-decoration: none; color: inherit; }
   .project-name { font-size: 20px; }
   .project-type { display: none; }
 
-  /* About — philosophy line */
-  .about-philosophy { flex-wrap: wrap; }
-  .about-line { white-space: normal; font-size: 16px; }
+  /* About — philosophy: stacked lines, no separators */
+  .about-philosophy { flex-direction: column; gap: 2px; margin-top: 16px; }
+  .about-sep-dot { display: none; }
+  .about-line { white-space: normal; font-size: 15px; }
 
   /* About — experience list */
-  .about-body { max-width: 100%; }
+  .about-body { max-width: 100%; margin-top: 28px; }
+  .about-studio { margin-top: 20px; }
   .about-focus-item { grid-template-columns: 40px 1fr; }
   .about-focus-dot-col { display: none; }
   .about-focus-type { display: none; }
@@ -866,7 +878,8 @@ a { text-decoration: none; color: inherit; }
   .about-focus-year { font-size: 14px; }
 
   /* Connect */
-  .connect-text { flex-wrap: wrap; }
+  .connect-body { max-width: 100%; }
+  .connect-text { flex-wrap: wrap; margin-top: 16px; }
   .connect-phrase { white-space: normal; font-size: 16px; }
   .connect-sub { font-size: 16px; }
 }
