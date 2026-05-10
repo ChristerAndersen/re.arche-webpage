@@ -10,6 +10,7 @@ body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
 
@@ -822,13 +823,18 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 960px) {
   body { overflow: auto; }
   .page { height: auto; min-height: 100svh; }
-  .hero { padding-top: 32px; }
+  .hero {
+    padding-top: 32px;
+    /* reserve space above iPhone home indicator */
+    padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px));
+  }
   .content-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
   .card { max-width: 320px; }
-  .brand-strip { margin-top: 52px; }
+  /* remove the desktop gap that reserved space for the side card */
+  .projects { padding-right: 0; }
 }
 
 @media (max-width: 640px) {
@@ -838,7 +844,29 @@ a { text-decoration: none; color: inherit; }
   .nav { gap: 22px; }
   .nav-link { font-size: 14px; }
   .headline { font-size: clamp(48px, 12vw, 68px); }
-  .project-name { font-size: 22px; }
   .brand-strip { font-size: 10.5px; gap: 10px; }
   .card { max-width: 100%; }
+
+  /* Home — project list */
+  .project { grid-template-columns: 44px 1fr; }
+  .project-dot { display: none; }
+  .project-name { font-size: 20px; }
+  .project-type { display: none; }
+
+  /* About — philosophy line */
+  .about-philosophy { flex-wrap: wrap; }
+  .about-line { white-space: normal; font-size: 16px; }
+
+  /* About — experience list */
+  .about-body { max-width: 100%; }
+  .about-focus-item { grid-template-columns: 40px 1fr; }
+  .about-focus-dot-col { display: none; }
+  .about-focus-type { display: none; }
+  .about-focus-name { font-size: 20px; }
+  .about-focus-year { font-size: 14px; }
+
+  /* Connect */
+  .connect-text { flex-wrap: wrap; }
+  .connect-phrase { white-space: normal; font-size: 16px; }
+  .connect-sub { font-size: 16px; }
 }
